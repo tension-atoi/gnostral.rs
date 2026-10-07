@@ -1,6 +1,6 @@
 # Q-004 — XINFER-SPIKE-01
 
-State: ACTIVE
+State: CLOSED — NOT_QUALIFIED / RUNTIME_BLOCKED
 
 ## Question
 

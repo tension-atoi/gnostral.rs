@@ -1,0 +1,60 @@
+{
+  "quest": "Q-004-XINFER-SPIKE-01",
+  "date": "2026-10-07",
+  "upstream": {
+    "repository": "https://github.com/guoqingbao/xinfer",
+    "revision": "b88c15334fb607ff52cdc3fd875c3da796dcc020",
+    "license": "MIT"
+  },
+  "build": {
+    "clean_cuda_13_4": {
+      "status": "FAIL",
+      "reason": "pinned cudarc rejects CUDA toolkit 13.4 in build.rs"
+    },
+    "compat_shim": {
+      "status": "PASS",
+      "shim_behavior": "rewrites nvcc --version from 13.4 to 13.3 only; compilation delegates to /opt/cuda/bin/nvcc 13.4",
+      "target_arch": "sm_86",
+      "binary_version": "0.14.5",
+      "binary_sha256_prefix": "fdeaed1d"
+    }
+  },
+  "runtime_intakes": [
+    {
+      "model": "Qwen3.5-9B-Q4_K_M GGUF",
+      "result": "FAIL_BEFORE_READY",
+      "reason": "CUDA out of memory during language-model load",
+      "kv_experiment_reached": false
+    },
+    {
+      "model": "DeepSeek-R1-0528-Qwen3-8B-Q4_K_M GGUF",
+      "model_sha256": "713d3a7a93f306763a6de2b5e9f9350e3aeee3bbfe8c3ee0066b61939feaa332",
+      "result": "FAIL_BEFORE_READY",
+      "reason": "CUDA out of memory during model load",
+      "kv_experiment_reached": false
+    },
+    {
+      "model": "Phi-4-mini-instruct Q4_K_M GGUF",
+      "model_sha256": "855cf60f7f8108713fb0e739cab72fd9dbf6c6d4160bd7ff0358142c74ae3287",
+      "result": "FAIL_BEFORE_READY",
+      "reason": "Merged quantized weight is not supported for GGUF varbuilder at the moment",
+      "auto_and_turbo4_same_failure": true,
+      "kv_experiment_reached": false
+    }
+  ],
+  "verdict": {
+    "state": "NOT_QUALIFIED_RUNTIME_BLOCKED",
+    "claims": [
+      "xInfer can compile for sm_86 on this host only through an explicit compatibility shim around the pinned cudarc CUDA-version gate",
+      "multiple local GGUF paths fail before a semantic-ready KV-cache comparison can begin"
+    ],
+    "non_claims": [
+      "TurboQuant KV effectiveness on this host",
+      "continuous batching quality",
+      "prefix-cache quality",
+      "scheduler superiority",
+      "production suitability"
+    ],
+    "adoption": "REJECTED_FOR_NOW"
+  }
+}

@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.4.0 - 2026-10-07
+
+xInfer challenger intake.
+
+- close Q-004 as NOT_QUALIFIED / RUNTIME_BLOCKED;
+- preserve clean CUDA 13.4 build failure from the pinned cudarc gate;
+- record a separate diagnostic compatibility-shim build that produced real sm_86 kernels without patching xInfer source;
+- retain Qwen3.5-9B and Qwen3-8B GGUF load OOMs;
+- retain the Phi-4-mini GGUF merged-quantized-weight implementation gap;
+- explicitly leave TurboQuant KV, continuous batching, prefix cache, and scheduler quality unproven locally;
+- reject xInfer adoption for now rather than converting the research lab into an upstream repair fork.
+
 ## 0.3.0 - 2026-10-07
 
 Elastic residency observability qualification.
