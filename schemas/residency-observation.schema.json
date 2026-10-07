@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/tension-atoi/gnostral.rs/schemas/residency-observation.schema.json",
+  "title": "gnostral.rs residency observation",
+  "type": "object",
+  "required": ["quest", "track", "identity", "profile", "state", "observations", "verdict"],
+  "properties": {
+    "quest": { "const": "Q-003-ELASTIC-LEDGER-02" },
+    "track": {
+      "enum": ["DENSE_RESIDENT", "MOE_OVERSUBSCRIBED", "VMM_PRIMITIVE"]
+    },
+    "identity": { "type": "object" },
+    "profile": { "enum": ["CONTROL", "DESKTOP-PRESSURE"] },
+    "state": {
+      "enum": ["PROCESS_COLD", "HOST_WARM", "ENGINE_WARM", "RECLAIMED"]
+    },
+    "observations": { "type": "object" },
+    "verdict": {
+      "type": "object",
+      "required": ["classification", "claims", "non_claims"]
+    }
+  },
+  "additionalProperties": true
+}
