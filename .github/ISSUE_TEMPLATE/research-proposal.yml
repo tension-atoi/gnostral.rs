@@ -1,0 +1,28 @@
+name: Research proposal
+description: Propose a new bounded research question
+title: "[research] "
+body:
+  - type: textarea
+    id: question
+    attributes:
+      label: Research question
+    validations:
+      required: true
+  - type: textarea
+    id: hypothesis
+    attributes:
+      label: Hypothesis
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Required evidence
+    validations:
+      required: true
+  - type: textarea
+    id: stop
+    attributes:
+      label: Stop / rejection gate
+    validations:
+      required: true

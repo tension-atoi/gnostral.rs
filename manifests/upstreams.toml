@@ -1,0 +1,36 @@
+schema = 1
+
+[[project]]
+name = "mistral.rs"
+repository = "https://github.com/EricLBuehler/mistral.rs"
+state = "REFERENCE_ONLY"
+
+[[project]]
+name = "candle"
+repository = "https://github.com/huggingface/candle"
+state = "REFERENCE_ONLY"
+
+[[project]]
+name = "candle-vllm"
+repository = "https://github.com/EricLBuehler/candle-vllm"
+state = "REFERENCE_ONLY"
+
+[[project]]
+name = "pulsar"
+repository = "https://github.com/giannisanni/pulsar"
+state = "REFERENCE_ONLY"
+
+[[project]]
+name = "xinfer"
+repository = "https://github.com/guoqingbao/xinfer"
+state = "REFERENCE_ONLY"
+
+[[project]]
+name = "zllm"
+repository = "https://github.com/zllm-lab/zllm"
+state = "REFERENCE_ONLY"
+
+[[project]]
+name = "unillm"
+repository = "https://github.com/cognisoc/unillm"
+state = "REFERENCE_ONLY"

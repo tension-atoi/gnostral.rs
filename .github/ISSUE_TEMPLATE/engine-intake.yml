@@ -1,0 +1,34 @@
+name: Engine intake
+description: Propose a Rust-native or Rust-first engine/runtime for evaluation
+title: "[engine] "
+body:
+  - type: input
+    id: repo
+    attributes:
+      label: Canonical repository
+    validations:
+      required: true
+  - type: input
+    id: revision
+    attributes:
+      label: Revision or release
+    validations:
+      required: true
+  - type: input
+    id: license
+    attributes:
+      label: License
+    validations:
+      required: true
+  - type: textarea
+    id: capability
+    attributes:
+      label: Capability not already represented
+    validations:
+      required: true
+  - type: textarea
+    id: gate
+    attributes:
+      label: Proposed bounded evaluation gate
+    validations:
+      required: true
