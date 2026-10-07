@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.3.0 - 2026-10-07
+
+Elastic residency observability qualification.
+
+- close Q-003 with an observability contract supported across three mechanism classes;
+- qualify dense mistral.rs/LFM2.5 residency and reclaim under CONTROL;
+- reproduce Pulsar Qwen3-30B-A3B Q2_K >VRAM execution with warm host + VRAM cache;
+- qualify CUDA VMM stable-address remapping and pagewise map/unmap/release;
+- preserve non-comparability of throughput across workload classes;
+- reject promotion to a generic materialization contract or new modeld authority.
+
 ## 0.2.0 - 2026-10-07
 
 Runtime lifecycle qualification.

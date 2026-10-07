@@ -1,6 +1,6 @@
 # Q-003 — ELASTIC-LEDGER-02
 
-State: ACTIVE
+State: CLOSED — OBSERVABILITY_CONTRACT_SUPPORTED
 
 ## Question
 
@@ -81,3 +81,14 @@ comparable, incomparable, unknown, and unsafe.
 
 The result must be sufficient to decide whether Q-007 can define only an
 observability contract or something stronger.
+
+## Closure
+
+Closed on 2026-10-07 as **OBSERVABILITY_CONTRACT_SUPPORTED**.
+
+Published evidence:
+- `evidence/q003/residency-ledger.json`
+- `research/runtime/Q003-ELASTIC-LEDGER.md`
+
+Q-003 supports mandatory runtime observability but does not authorize a
+generic materialization API or new residency authority.

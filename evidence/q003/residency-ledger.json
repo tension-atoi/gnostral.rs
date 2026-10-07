@@ -1,0 +1,150 @@
+{
+  "quest": "Q-003-ELASTIC-LEDGER-02",
+  "date": "2026-10-07",
+  "reference_host": {
+    "gpu": "NVIDIA GeForce RTX 3070",
+    "vram_mib": 8192,
+    "profile": "CONTROL"
+  },
+  "tracks": [
+    {
+      "track": "DENSE_RESIDENT",
+      "identity": {
+        "engine": "mistral.rs 0.9.3",
+        "engine_revision": "24dbf5c256f232176ee5949485ba264049407fbe",
+        "binary_sha256": "d6e107722cf026c40991fd748e7e5f67550e0b2193106ecb4da3bff606c55667",
+        "model": "LFM2.5-2.6B Q4_K_M GGUF",
+        "model_sha256": "02a8b7e17487d326e46d68ce0ba24211e1b80a14c4cd0597fa73c1cd697f52ed"
+      },
+      "profile": "CONTROL",
+      "state": "PROCESS_COLD",
+      "observations": {
+        "host_cache_state": "UNCONTROLLED_LIKELY_WARM_AFTER_IDENTITY_HASH",
+        "http_ready_ms": 21697.919959,
+        "semantic_ready": true,
+        "semantic_reproduced_in_independent_processes": true,
+        "request_latency_ms": 878.2510400051251,
+        "native_decode_tok_s": 168.19572,
+        "ambient_vram_mib": 1173,
+        "peak_total_vram_mib": 3153,
+        "rss_at_ready_mib": 3337.36328125,
+        "reclaim_to_ambient_ms": 191.83930102735758,
+        "xid_or_mmu_fault": false
+      },
+      "verdict": {
+        "classification": "PROVEN_BOUNDED",
+        "claims": [
+          "dense serving is semantically ready under CONTROL",
+          "physical GPU residency and process reclaim are observable"
+        ],
+        "non_claims": [
+          "storage-cold load time",
+          "cross-engine throughput superiority"
+        ]
+      }
+    },
+    {
+      "track": "MOE_OVERSUBSCRIBED",
+      "identity": {
+        "engine": "Pulsar",
+        "engine_revision": "18f990094e1091ee2ef3078f20be418f8c162f03",
+        "binary_sha256": "e68ebbb2c44f83d0d9c96634de4e34ca32acb7845fb7ada01e9e50aeb519230e",
+        "model": "Qwen3-30B-A3B Q2_K GGUF",
+        "model_bytes": 11811160064,
+        "model_sha256": "db3ce897ccc9e7d9dbf17fe083cae7880a2092aa473b45eba8b77715aa9ca170"
+      },
+      "profile": "CONTROL",
+      "state": "HOST_WARM",
+      "observations": {
+        "process_runs": 2,
+        "semantic_ready_both_runs": true,
+        "decode_tok_s": [43.79, 39.42],
+        "load_seconds": [6.9, 5.6],
+        "vram_cache_hit_pct": [94.0, 94.0],
+        "host_cache_pct_of_remainder": [100.0, 100.0],
+        "disk_seconds": [0.0, 0.0],
+        "ambient_vram_mib": 1241,
+        "peak_total_vram_mib": [7171, 7143],
+        "max_rss_mib": [919.95703125, 1018.41796875],
+        "process_exit_to_ambient_ms": [15.109228, 13.463386],
+        "xid_or_mmu_fault": false
+      },
+      "verdict": {
+        "classification": "PROVEN_BOUNDED",
+        "claims": [
+          "a model artifact larger than physical VRAM executes reproducibly",
+          "warm execution uses both VRAM and host cache",
+          "physical GPU residency returns to ambient after process exit"
+        ],
+        "non_claims": [
+          "storage-cold performance",
+          "generic MoE behavior",
+          "safety of the excluded IQ2_XXS configuration"
+        ]
+      }
+    },
+    {
+      "track": "VMM_PRIMITIVE",
+      "identity": {
+        "source": "gnosis-vmm-driver-probe",
+        "cudarc": "0.18.2",
+        "whole_binary_sha256": "005422fe432e4a94c8237659252a737d3fa5861a12c9adcc9a197ac8d106ddf7",
+        "pagewise_binary_sha256": "c42c6cf07c7e3909d439c789d2f7d48a846216e4cd887d48ee023f5d0b372cbb"
+      },
+      "profile": "CONTROL",
+      "state": "RECLAIMED",
+      "observations": {
+        "recommended_page_bytes": 2097152,
+        "stable_va_across_remap": true,
+        "data_roundtrip_verified": true,
+        "whole_256_mib_iterations": 5,
+        "whole_map_access_us_median": 65,
+        "whole_unmap_us_median": 85,
+        "whole_release_us_median": 92,
+        "pagewise_512_mib_pages": 256,
+        "pagewise_iterations": 3,
+        "pagewise_map_us_per_page_median": 26.67,
+        "pagewise_unmap_us_per_page_median": 12.74,
+        "pagewise_release_us_per_page_median": 8.64,
+        "peak_total_vram_mib_whole": 1633,
+        "peak_total_vram_mib_pagewise": 1837,
+        "xid_or_mmu_fault": false
+      },
+      "verdict": {
+        "classification": "PROVEN_BOUNDED",
+        "claims": [
+          "CUDA VMM remaps a stable virtual address across repeated physical allocations",
+          "2 MiB pagewise map/unmap/release is observable at microsecond scale",
+          "round-trip data integrity survives remapping"
+        ],
+        "non_claims": [
+          "model-level residency semantics",
+          "production allocator readiness",
+          "cross-GPU timing generality"
+        ]
+      }
+    }
+  ],
+  "comparability": {
+    "comparable": [
+      "exact artifact identity",
+      "desktop profile",
+      "ambient physical VRAM",
+      "peak physical VRAM",
+      "reclaim/release behavior",
+      "driver-fault observation",
+      "warmth/residency state classification"
+    ],
+    "not_comparable": [
+      "tokens per second across different workload classes",
+      "engine-specific cache representation",
+      "expert residency versus dense weight residency",
+      "CUDA virtual mapping versus semantic model state"
+    ]
+  },
+  "conclusion": {
+    "state": "OBSERVABILITY_CONTRACT_SUPPORTED",
+    "generic_materialization_contract": "NOT_PROVEN",
+    "new_modeld_authority": "NOT_AUTHORIZED"
+  }
+}
