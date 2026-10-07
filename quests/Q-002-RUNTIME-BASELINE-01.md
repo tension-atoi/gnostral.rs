@@ -62,3 +62,28 @@ external contract.
 Q-002 does not optimize kernels, enable PagedAttention, change placement
 policy, introduce multi-model orchestration, or prove production readiness.
 It establishes the control arm for later runtime comparisons.
+
+## Runtime profiles
+
+### CONTROL
+
+A comparable engine-control lane.
+
+- graphical session remains active;
+- known desktop infrastructure may be explicitly allow-listed;
+- opportunistic GPU compute clients such as browsers are not allowed;
+- preflight must be CLEAN before measurement.
+
+### DESKTOP-PRESSURE
+
+A real-workstation lane.
+
+- graphical session remains active;
+- browser/desktop GPU clients may remain active;
+- every observed compute client and baseline VRAM value is recorded;
+- the run is classified by its measured ambient pressure, not called CLEAN;
+- comparisons are valid only against other runs inside a compatible pressure envelope.
+
+CONTROL provides the cross-engine reference. DESKTOP-PRESSURE tests robustness
+under ordinary workstation contention. Neither lane may silently substitute for
+the other.

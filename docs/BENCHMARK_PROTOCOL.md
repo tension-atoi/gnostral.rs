@@ -27,3 +27,17 @@ Guardrails:
 - distinguish sampled nvidia-smi telemetry from allocator traces;
 - keep cold, warm-host-cache, and warm-VRAM-cache states separate;
 - never compare different quantizations/topologies as if they were identical.
+
+## Desktop profiles
+
+Cross-engine qualification uses two distinct lanes.
+
+CONTROL keeps the live graphical session but rejects opportunistic GPU compute
+clients. It is the primary comparison lane.
+
+DESKTOP-PRESSURE intentionally retains ordinary workstation GPU clients and
+records their exact identities plus ambient VRAM before each run. Results in
+this lane are robustness evidence and are never substituted for CONTROL.
+
+A pressure-lane result must retain the ambient VRAM envelope alongside the
+runtime result.
