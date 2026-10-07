@@ -37,4 +37,6 @@ state = "REFERENCE_ONLY"
 [[project]]
 name = "unillm"
 repository = "https://github.com/cognisoc/unillm"
+revision = "9e20eaf8d8b25191534f531746faa4c025a50453"
+license = "MIT"
 state = "REFERENCE_ONLY"
