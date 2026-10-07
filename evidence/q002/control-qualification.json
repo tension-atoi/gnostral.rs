@@ -1,0 +1,112 @@
+{
+  "quest": "Q-002-RUNTIME-BASELINE-01",
+  "engine": {
+    "name": "mistral.rs + experimental Bonsai/Candle path",
+    "version": "0.9.3",
+    "revision": "0bed3b4ce4f490131696ea268e133f952425bcc0",
+    "binary_sha256": "c29c9c822696f0c6b5460d5ee98884cafe5c1989cc884967595259cf09860189"
+  },
+  "model": {
+    "name": "Ternary Bonsai 2 27B PTQ1",
+    "sha256": "53107f530aa52eb00912263ab1ee29bd199261c87cd7b4ad4ca1318c1fe33ee3"
+  },
+  "host": {
+    "gpu": "NVIDIA GeForce RTX 3070",
+    "vram_mib": 8192,
+    "system_ram_gib": 32,
+    "driver": "615.71.09",
+    "cuda_umd": "13.4",
+    "desktop_profile": "CONTROL",
+    "allowed_compute_client": "tty7 desktop application"
+  },
+  "protocol": {
+    "device_layers": "0:64",
+    "max_model_len_declared": 4096,
+    "paged_attention": false,
+    "prefix_cache": false,
+    "recurrent_pool_slots": 2,
+    "semantic_gate": ["2+3=5", "7-4=3", "6-2=4", "3*2=6"]
+  },
+  "results": {
+    "cold_start": {
+      "process_start_to_http_ready_ms": 3835.804134,
+      "note": "process-cold; OS page cache was not flushed"
+    },
+    "warm_request": {
+      "stream_ttft_ms": 154.9731339327991,
+      "stream_wall_ms": 1748.1093059759587,
+      "completion_tokens_confirmed_by_paired_request": 64,
+      "client_inferred_tpot_ms_per_token": 25.287875746716818,
+      "native_decode_tokens_per_second": 40.97311,
+      "native_tpot_ms_per_token": 24.40625083133792
+    },
+    "concurrency": {
+      "C1": {"pass": true, "wall_ms": 125.08739007171243},
+      "C4": {"pass": true, "wall_ms": 266.8158080196008},
+      "C8": {"pass": false, "successes": 4, "attempts": 8},
+      "boundary_diagnostic": {
+        "C5": {"repeats": 2, "successes_each": 3, "recovery_probe_pass": true},
+        "C6": {"repeats": 2, "successes_each": 3, "recovery_probe_pass": true},
+        "C7": {"repeats": 2, "successes_each": 3, "recovery_probe_pass": true},
+        "C8": {"repeats": 2, "successes_each": 3, "recovery_probe_pass": true}
+      },
+      "root_cause": "UNKNOWN"
+    },
+    "memory": {
+      "ambient_vram_mib": 1169,
+      "vram_at_http_ready_mib": 7396,
+      "sampled_peak_total_vram_mib": 7654,
+      "sampled_min_free_vram_mib": 218,
+      "process_rss_at_http_ready_mib": 6826.51953125,
+      "process_rss_after_concurrency_mib": 6752.78515625
+    },
+    "context_growth": {
+      "384_input_tokens_fresh_process": "PASS",
+      "512_input_tokens_fresh_process": "FAIL_CUDA_OOM",
+      "1024_input_tokens_fresh_process": "FAIL",
+      "2048_input_tokens_fresh_process": "FAIL",
+      "3072_input_tokens_fresh_process": "FAIL",
+      "4000_input_tokens_fresh_process": "FAIL",
+      "declared_4096_context_qualified": false
+    },
+    "reclaim": {
+      "graceful_sigterm_to_exit_ms": 25.365868932567537,
+      "graceful_sigterm_to_ambient_ms": 253.6935310345143,
+      "graceful_exit_to_ambient_ms": 228.32766210194677
+    },
+    "restart": {
+      "three_successive_semantic_ready_starts": true,
+      "restart_http_ready_ms": [2558.86449, 2561.529479, 2560.630876]
+    },
+    "failure_recovery": {
+      "sigkill_to_ambient_ms": 238.098158,
+      "post_sigkill_restart_semantic_ready": true
+    },
+    "stability": {
+      "nvidia_xid_or_mmu_fault_observed": false
+    },
+    "desktop_pressure": {
+      "ambient_vram_mib": 1446,
+      "http_ready_ms": 14094.500986,
+      "semantic_ready": false,
+      "failure": "CUDA_ERROR_OUT_OF_MEMORY"
+    }
+  },
+  "verdict": {
+    "state": "QUALIFIED_WITH_LIMITS",
+    "claims": [
+      "semantic-ready control operation is reproduced",
+      "C1 and C4 one-token semantic concurrency are qualified",
+      "graceful and abrupt process reclaim recover VRAM without observed Xid",
+      "restart after graceful stop and SIGKILL is qualified",
+      "384-token isolated input succeeds under the measured control envelope"
+    ],
+    "non_claims": [
+      "C5 or greater concurrency",
+      "4096-token usable context",
+      "production serving readiness",
+      "cross-GPU generality",
+      "root cause for partial failures above C4"
+    ]
+  }
+}

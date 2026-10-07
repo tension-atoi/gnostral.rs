@@ -1,6 +1,6 @@
 # Q-002 — RUNTIME-BASELINE-01
 
-State: ACTIVE
+State: CLOSED — QUALIFIED_WITH_LIMITS
 
 ## Question
 
@@ -101,3 +101,13 @@ semantic-ready. This refinement tightens the gate; it does not reinterpret a
 failed measurement as success.
 
 See `research/runtime/Q002-DESKTOP-PRESSURE-01.md`.
+
+## Closure
+
+Closed on 2026-10-07 as **QUALIFIED_WITH_LIMITS**.
+
+See:
+- `research/runtime/Q002-CONTROL-QUALIFICATION.md`
+- `evidence/q002/control-qualification.json`
+
+The control arm is now frozen for Q-003 and later challenger comparisons.
