@@ -23,6 +23,8 @@ state = "REFERENCE_ONLY"
 [[project]]
 name = "xinfer"
 repository = "https://github.com/guoqingbao/xinfer"
+revision = "b88c15334fb607ff52cdc3fd875c3da796dcc020"
+license = "MIT"
 state = "REFERENCE_ONLY"
 
 [[project]]
