@@ -12,3 +12,21 @@ fatal model-state error from being mislabeled as a concurrency result.
 
 `q002_reclaim.py` measures SIGTERM→exit and return toward a declared ambient
 total-VRAM envelope. It keeps reclaim telemetry separate from engine output.
+
+## EngineProvider v0 reference contract
+
+`engine-provider-contract/` is a dependency-free executable model of the
+Q-007 provider boundary.
+
+It tests that heterogeneous runtimes can be represented without promoting
+engine-internal layer placement, KV paging, or token batching into supervisor
+authority.
+
+Run locally:
+
+```bash
+cd harness/engine-provider-contract
+cargo test
+```
+
+GitHub Actions is not the qualification authority for this contract.

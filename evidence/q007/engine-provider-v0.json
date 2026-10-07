@@ -1,0 +1,34 @@
+{
+  "quest": "Q-007-ENGINE-PROVIDER-01",
+  "date": "2026-10-07",
+  "contract": "contracts/ENGINE_PROVIDER_V0.md",
+  "reference_crate": "harness/engine-provider-contract",
+  "qualification": {
+    "state": "CONTRACT_V0_QUALIFIED",
+    "tests_passed": 7,
+    "tests_failed": 0
+  },
+  "invariants": [
+    "declared capabilities are distinct from qualified capabilities",
+    "semantic readiness is first-class",
+    "runtime facts carry provenance or UNKNOWN",
+    "supervisor may specify resource envelopes but not placement mechanisms",
+    "engine unload and physical reclaim are distinct receipts",
+    "device placement, KV materialization, paging and token batching remain engine-internal"
+  ],
+  "represented_cases": [
+    "mistral.rs/Bonsai declared-vs-qualified context and reclaim",
+    "Pulsar tiered VRAM+host residency",
+    "zLLM declared adaptive placement with blocked qualification",
+    "one-shot CLI engine without control or registration readiness phases"
+  ],
+  "forbidden_generic_authority": [
+    "move layer to device",
+    "set GPU layer count",
+    "map/unmap device page",
+    "allocate/evict/promote KV blocks",
+    "construct token-level batches",
+    "select engine kernel"
+  ],
+  "next_gate": "Q-008-MODELD-PROMOTION-GATE"
+}

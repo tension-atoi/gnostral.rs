@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.7.0 - 2026-10-07
+
+EngineProvider v0 contract qualification.
+
+- close Q-007 as CONTRACT_V0_QUALIFIED;
+- publish an explicit provider lifecycle and semantic-readiness state model;
+- separate declared capabilities from evidence-qualified capabilities;
+- make UNKNOWN a first-class operational fact with observation provenance;
+- separate engine unload acknowledgement from physical reclaim qualification;
+- allow supervisor resource envelopes while forbidding generic layer/page/KV placement commands;
+- publish a dependency-free Rust reference contract with 7/7 local tests covering mistral.rs/Bonsai, Pulsar, zLLM, and one-shot CLI behavior.
+
 ## 0.6.0 - 2026-10-07
 
 UniLLM donor architecture analysis.
