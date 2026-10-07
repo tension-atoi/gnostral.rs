@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.6.0 - 2026-10-07
+
+UniLLM donor architecture analysis.
+
+- close Q-006 as DONOR_ANALYSIS_COMPLETE;
+- validate unillm-kv 15/15 and unillm-scheduler 7/7 unit tests;
+- adopt/adapt registry, streaming runner, request state, and strengthened lifecycle/health concepts;
+- keep device placement, KV materialization, radix/paged mutation, and token-level batching engine-internal;
+- reject current hard-coded/mock operational telemetry as provider facts;
+- require UNKNOWN instead of plausible default values when runtime observation is unavailable;
+- require semantic-ready and physical reclaim receipts in the future EngineProvider contract.
+
 ## 0.5.0 - 2026-10-07
 
 zLLM CUDA placement intake.

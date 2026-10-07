@@ -1,0 +1,111 @@
+{
+  "quest": "Q-006-UNILLM-DONOR-01",
+  "date": "2026-10-07",
+  "upstream": {
+    "repository": "https://github.com/cognisoc/unillm",
+    "revision": "9e20eaf8d8b25191534f531746faa4c025a50453",
+    "license": "MIT"
+  },
+  "local_validation": {
+    "unillm_kv_tests": {"passed": 15, "failed": 0},
+    "unillm_scheduler_tests": {"passed": 7, "failed": 0},
+    "scope": "CPU/unit-level donor validation; not GPU runtime qualification"
+  },
+  "decisions": [
+    {
+      "surface": "ModelRunner streaming generation contract",
+      "decision": "ADAPT_CONCEPT",
+      "reason": "small architecture-neutral execution surface; future provider needs semantic generation but not tensor-level model internals"
+    },
+    {
+      "surface": "ModelFactory / ModelRegistry capability discovery",
+      "decision": "ADOPT_CONCEPT",
+      "reason": "explicit architecture registration and support discovery fit provider discovery without granting materialization authority"
+    },
+    {
+      "surface": "Model memory_requirements",
+      "decision": "ADAPT_CONCEPT",
+      "reason": "useful as an estimate only; must be provenance-tagged and separate from observed physical residency"
+    },
+    {
+      "surface": "Model::to_device",
+      "decision": "ENGINE_INTERNAL",
+      "reason": "Q-003 showed placement/materialization belongs inside engines; supervisor must not micromanage device movement"
+    },
+    {
+      "surface": "KvCacheProvider / HybridKVCache mutation",
+      "decision": "ENGINE_INTERNAL",
+      "reason": "cache pages, radix/paged tiers, clear and promotion/demotion are engine mechanisms; only summarized observations may cross the provider boundary"
+    },
+    {
+      "surface": "PagedKvAllocator and RadixCache concepts",
+      "decision": "ENGINE_INTERNAL",
+      "reason": "unit primitives are testable, but GPU integration, L3 compression and defragmentation include placeholders and are not a supervisor contract"
+    },
+    {
+      "surface": "ContinuousBatchingScheduler",
+      "decision": "ENGINE_INTERNAL",
+      "reason": "token-level admission/batching is runtime scheduling; provider may expose capacity and outcomes, not control each batch"
+    },
+    {
+      "surface": "Request priority, timeout and request state",
+      "decision": "ADAPT_CONCEPT",
+      "reason": "deadline/priority semantics are useful at the outer request boundary, provided they remain distinct from token-level engine scheduling"
+    },
+    {
+      "surface": "start / stop / is_running lifecycle",
+      "decision": "ADAPT_CONCEPT",
+      "reason": "useful lifecycle shape but boolean running is weaker than Q-002 semantic-ready and Q-003 reclaim requirements"
+    },
+    {
+      "surface": "EngineHealth type",
+      "decision": "ADAPT_CONCEPT",
+      "reason": "typed health shape is useful; future contract must include readiness phase, last error, queue state and evidence provenance"
+    },
+    {
+      "surface": "current EngineHealth GPU-memory implementation",
+      "decision": "REJECT",
+      "reason": "gpu_memory_usage is currently a hard-coded mock value and cannot be promoted as runtime evidence"
+    },
+    {
+      "surface": "current response cache/resource metrics",
+      "decision": "REJECT",
+      "reason": "TTFT/cache hit/memory/utilization fields contain hard-coded or simplified values in the current inference path"
+    },
+    {
+      "surface": "ExecutionContext memory_pressure as scheduler command",
+      "decision": "REJECT",
+      "reason": "memory pressure should be an observed fact/capability input; a generic supervisor must not prescribe engine-internal placement through an unqualified scalar"
+    },
+    {
+      "surface": "semantic-ready lifecycle state",
+      "decision": "ADOPT_CONCEPT_FROM_GNOSTRAL_NOT_UNILLM",
+      "reason": "required by Q-002; absent as a first-class UniLLM lifecycle state"
+    },
+    {
+      "surface": "unload plus physical reclaim receipt",
+      "decision": "ADOPT_CONCEPT_FROM_GNOSTRAL_NOT_UNILLM",
+      "reason": "required by Q-002/Q-003; current UniLLM stop/shutdown does not express physical reclaim completion"
+    }
+  ],
+  "conclusion": {
+    "state": "DONOR_ANALYSIS_COMPLETE",
+    "strongest_donors": [
+      "architecture/provider registry",
+      "small streaming runner abstraction",
+      "typed request state/priority/deadline",
+      "lifecycle and health shapes after strengthening"
+    ],
+    "must_remain_engine_internal": [
+      "device movement",
+      "KV materialization",
+      "radix/paged cache mutation",
+      "token-level batching and scheduling"
+    ],
+    "must_not_be_copied_as_facts": [
+      "mock GPU memory health values",
+      "hard-coded cache hit/resource metrics",
+      "placeholder GPU cache analysis"
+    ]
+  }
+}

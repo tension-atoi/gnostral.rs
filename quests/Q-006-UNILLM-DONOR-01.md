@@ -1,6 +1,6 @@
 # Q-006 — UNILLM-DONOR-01
 
-State: ACTIVE
+State: CLOSED — DONOR_ANALYSIS_COMPLETE
 
 ## Question
 
