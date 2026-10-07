@@ -11,6 +11,6 @@ The quest log is the public execution order for gnostral.rs. A quest is not a ge
 | Q-005 | ZLLM-PLACEMENT-01 | CLOSED | Evaluate automatic CPU↔CUDA placement under changing desktop pressure. |
 | Q-006 | UNILLM-DONOR-01 | CLOSED | Evaluate model/runtime abstractions as donor architecture. |
 | Q-007 | ENGINE-PROVIDER-01 | CLOSED | Define an engine-neutral lifecycle/capability contract after Q-002–Q-006. |
-| Q-008 | MODELD-PROMOTION-GATE | BLOCKED | Decide whether any residency authority deserves production promotion. |
+| Q-008 | MODELD-PROMOTION-GATE | **ACTIVE** | Decide whether any residency authority deserves production promotion. |
 
 A quest closes only when its protocol was frozen before the decisive run, evidence is retained, negative observations remain visible, non-claims are explicit, and upstream / patched-upstream / lab-owned behavior are separated.
