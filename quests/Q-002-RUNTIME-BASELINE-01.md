@@ -87,3 +87,17 @@ A real-workstation lane.
 CONTROL provides the cross-engine reference. DESKTOP-PRESSURE tests robustness
 under ordinary workstation contention. Neither lane may silently substitute for
 the other.
+
+## Protocol refinement after DESKTOP-PRESSURE-01
+
+The first pressure run demonstrated that HTTP control-plane availability can
+precede usable model state. Q-002 therefore records two readiness milestones:
+
+- HTTP-ready: `/v1/models` responds successfully;
+- semantic-ready: the frozen one-token correctness probe succeeds.
+
+Concurrency, context, and throughput qualification begin only after
+semantic-ready. This refinement tightens the gate; it does not reinterpret a
+failed measurement as success.
+
+See `research/runtime/Q002-DESKTOP-PRESSURE-01.md`.

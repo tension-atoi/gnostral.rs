@@ -1,0 +1,30 @@
+{
+  "quest": "Q-002-RUNTIME-BASELINE-01",
+  "profile": "DESKTOP-PRESSURE",
+  "classification": "OBSERVED_BOUNDED_NEGATIVE",
+  "engine_revision": "0bed3b4ce4f490131696ea268e133f952425bcc0",
+  "binary_sha256": "c29c9c822696f0c6b5460d5ee98884cafe5c1989cc884967595259cf09860189",
+  "model_sha256": "53107f530aa52eb00912263ab1ee29bd199261c87cd7b4ad4ca1318c1fe33ee3",
+  "protocol": {
+    "device_layers": "0:64",
+    "max_model_len": 4096,
+    "paged_attention": false,
+    "prefix_cache": false,
+    "recurrent_pool_slots": 2
+  },
+  "results": {
+    "ambient_vram_mib": 1446,
+    "http_ready_ms": 14094.500986,
+    "vram_at_http_ready_mib": 7686,
+    "free_vram_at_http_ready_mib": 186,
+    "sampled_peak_vram_mib": 7718,
+    "sampled_min_free_vram_mib": 154,
+    "semantic_ready": false,
+    "first_semantic_http_status": 500,
+    "first_semantic_error": "CUDA_ERROR_OUT_OF_MEMORY",
+    "cache_reset_error": "CUDA_ERROR_OUT_OF_MEMORY",
+    "concurrency_results_valid": false,
+    "xid_or_mmu_fault_observed": false,
+    "exact_reclaim_latency_ms": null
+  }
+}
