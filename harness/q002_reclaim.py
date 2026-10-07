@@ -27,9 +27,18 @@ def gpu_used_mib() -> int:
 def alive(pid: int) -> bool:
     try:
         os.kill(pid, 0)
-        return True
     except ProcessLookupError:
         return False
+
+    try:
+        stat = Path(f"/proc/{pid}/stat").read_text()
+        state = stat.split()[2]
+        if state == "Z":
+            return False
+    except (FileNotFoundError, IndexError):
+        return False
+
+    return True
 
 
 def main() -> int:
