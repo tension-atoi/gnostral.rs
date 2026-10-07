@@ -30,6 +30,8 @@ state = "REFERENCE_ONLY"
 [[project]]
 name = "zllm"
 repository = "https://github.com/zllm-lab/zllm"
+revision = "9a9d1ef0b55b09e1c41589ff83c407d3549f2b67"
+license = "Apache-2.0"
 state = "REFERENCE_ONLY"
 
 [[project]]
