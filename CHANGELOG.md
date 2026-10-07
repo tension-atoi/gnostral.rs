@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.5.0 - 2026-10-07
+
+zLLM CUDA placement intake.
+
+- close Q-005 as BLOCKED_MODEL_INVENTORY;
+- clean-build zLLM 0.8.11 against local CUDA 13.4 without a compatibility shim;
+- qualify Gemma4 E4B semantic readiness on the official standalone HTTP CUDA runtime;
+- retain model-registered readiness as stronger than socket/HTTP readiness;
+- qualify bounded reclaim and no observed Xid/MMU fault;
+- preserve the Qwen3.6/3.8 adaptive-placement claim as untested;
+- reject a 16.8–19 GB checkpoint download because it would consume nearly half of the remaining workbench free-space margin.
+
 ## 0.4.0 - 2026-10-07
 
 xInfer challenger intake.

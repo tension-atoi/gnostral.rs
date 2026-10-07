@@ -1,0 +1,64 @@
+{
+  "quest": "Q-005-ZLLM-PLACEMENT-01",
+  "date": "2026-10-07",
+  "upstream": {
+    "repository": "https://github.com/zllm-lab/zllm",
+    "revision": "9a9d1ef0b55b09e1c41589ff83c407d3549f2b67",
+    "version": "0.8.11",
+    "license": "Apache-2.0"
+  },
+  "build": {
+    "cuda_13_4_clean_build": "PASS",
+    "fedora_cuda_binary_sha256": "942a3a8dd773dc3f77ef50f80c891c9aef5891cd9d5e930c888d04ed18b48d3e",
+    "rt_cuda_binary_sha256": "25297110daf99f71901ae4b56cb4db0799394a80f86f60354329ba59fc9d5cc8",
+    "compatibility_shim": false
+  },
+  "cuda_intake": {
+    "model": "Gemma4 E4B Q4_K_M",
+    "zero_config_load_seconds": 11.2,
+    "zero_config_single_request_frontend_supported": false,
+    "standalone_http_semantic_ready": true,
+    "model_registered_ms": 2231.233317,
+    "semantic_probe": "2+3=5",
+    "semantic_latency_ms": 516.160203027539,
+    "ambient_vram_mib": 1229,
+    "peak_total_vram_mib": 4352,
+    "rss_at_ready_mib": 731.95703125,
+    "rss_after_request_mib": 965.95703125,
+    "sigterm_to_ambient_vram_ms": 167.8346840199083,
+    "xid_or_mmu_fault": false
+  },
+  "placement_rail": {
+    "required_model_family": "Qwen3.6/3.8 27B",
+    "local_compatible_artifact_present": false,
+    "cuda_hybrid_supported_quantizations": [
+      "Q4_K",
+      "Q5_K",
+      "Q6_K",
+      "Q8_0",
+      "F16",
+      "BF16",
+      "F32"
+    ],
+    "candidate_q4_k_m_download_gb": 16.8,
+    "workbench_free_space_gb": 36,
+    "download_performed": false,
+    "reason": "preserve lab disk safety; downloading the placement artifact would consume nearly half of remaining free space",
+    "adaptive_placement_tested": false
+  },
+  "verdict": {
+    "state": "BLOCKED_MODEL_INVENTORY",
+    "claims": [
+      "the pinned zLLM CUDA runtime builds cleanly against local CUDA 13.4",
+      "Gemma4 E4B reaches semantic readiness through the official standalone HTTP runtime",
+      "physical VRAM reclaim is bounded and no Xid/MMU fault was observed"
+    ],
+    "non_claims": [
+      "Qwen3.6/3.8 adaptive CPU-CUDA placement",
+      "placement response to changing ambient VRAM",
+      "zLLM throughput superiority",
+      "production adoption"
+    ],
+    "adoption": "DEFERRED"
+  }
+}

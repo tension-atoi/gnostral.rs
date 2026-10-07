@@ -1,6 +1,6 @@
 # Q-005 — ZLLM-PLACEMENT-01
 
-State: ACTIVE
+State: CLOSED — BLOCKED_MODEL_INVENTORY
 
 ## Question
 
