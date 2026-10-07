@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/tension-atoi/gnostral.rs/schemas/runtime-baseline.schema.json",
+  "title": "gnostral.rs runtime baseline qualification",
+  "type": "object",
+  "required": ["quest", "engine", "model", "host", "protocol", "results", "verdict"],
+  "properties": {
+    "quest": { "const": "Q-002-RUNTIME-BASELINE-01" },
+    "engine": { "type": "object" },
+    "model": { "type": "object" },
+    "host": { "type": "object" },
+    "protocol": { "type": "object" },
+    "results": {
+      "type": "object",
+      "required": ["cold_start", "warm_request", "concurrency", "memory", "reclaim", "restart", "stability"]
+    },
+    "verdict": {
+      "type": "object",
+      "required": ["state", "claims", "non_claims"]
+    }
+  },
+  "additionalProperties": true
+}
