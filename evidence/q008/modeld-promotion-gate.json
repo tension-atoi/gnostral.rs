@@ -1,0 +1,87 @@
+{
+  "quest": "Q-008-MODELD-PROMOTION-GATE",
+  "date": "2026-10-07",
+  "decisions": [
+    {
+      "surface": "GENERIC_MATERIALIZATION",
+      "decision": "REJECT_GENERIC_AUTHORITY",
+      "criteria": {
+        "C1_generality": "FAIL",
+        "C2_causal_evidence": "FAIL",
+        "C3_semantic_safety": "INSUFFICIENT_GENERIC_EVIDENCE",
+        "C4_reclaim_fault_safety": "ENGINE_SPECIFIC_ONLY",
+        "C5_ownership_boundary": "FAIL_IF_PROMOTED",
+        "C6_truthful_observability": "PASS_AS_OBSERVATION_ONLY",
+        "C7_failure_closure": "PASS"
+      },
+      "reason": "Pulsar tiered cache, CUDA VMM mapping, mistral.rs residency, zLLM placement and xInfer KV paths are materially different; no generic layer/page/KV control has causal multi-engine proof"
+    },
+    {
+      "surface": "RESOURCE_ENVELOPE_INTENT",
+      "decision": "PROMOTE_EXPERIMENTAL",
+      "criteria": {
+        "C1_generality": "PASS_CONTRACT_REPRESENTATION",
+        "C2_causal_evidence": "PARTIAL",
+        "C3_semantic_safety": "REQUIRES_SEMANTIC_READY_RECEIPT",
+        "C4_reclaim_fault_safety": "REQUIRES_RECLAIM_RECEIPT",
+        "C5_ownership_boundary": "PASS",
+        "C6_truthful_observability": "PASS_BY_CONTRACT",
+        "C7_failure_closure": "PASS"
+      },
+      "reason": "budgets and reserve requirements are safe intents if engines retain placement authority and may explicitly reject unsatisfiable envelopes; adaptive placement under changing VRAM is not yet causally qualified across engines"
+    },
+    {
+      "surface": "RUNTIME_OBSERVABILITY",
+      "decision": "PROMOTE_CONTRACT",
+      "criteria": {
+        "C1_generality": "PASS",
+        "C2_causal_evidence": "NOT_APPLICABLE_OBSERVATION_ONLY",
+        "C3_semantic_safety": "PASS_WHERE_SEMANTIC_ENGINE_APPLIES",
+        "C4_reclaim_fault_safety": "PASS_BOUNDED",
+        "C5_ownership_boundary": "PASS",
+        "C6_truthful_observability": "PASS",
+        "C7_failure_closure": "PASS"
+      },
+      "reason": "Q-003 normalized identity, ambient/peak VRAM, warmth/residency state, reclaim/release and driver health across dense, oversubscribed MoE and VMM primitive tracks"
+    },
+    {
+      "surface": "ENGINE_PROVIDER_LIFECYCLE",
+      "decision": "PROMOTE_EXPERIMENTAL",
+      "criteria": {
+        "C1_generality": "PASS_REFERENCE_MODEL",
+        "C2_causal_evidence": "NOT_APPLICABLE_TO_MATERIALIZATION",
+        "C3_semantic_safety": "PASS_CONTRACT_REQUIREMENT",
+        "C4_reclaim_fault_safety": "PASS_CONTRACT_REQUIREMENT",
+        "C5_ownership_boundary": "PASS",
+        "C6_truthful_observability": "PASS",
+        "C7_failure_closure": "PASS"
+      },
+      "reason": "Q-007 reference contract represents mistral.rs/Bonsai, Pulsar, zLLM and one-shot CLI behavior with 7/7 tests, but concrete provider adapters are not yet implemented or qualified"
+    }
+  ],
+  "ratified_boundary": {
+    "modeld_may_own": [
+      "engine registry and selection",
+      "exact model artifact identity",
+      "declared versus qualified capability ledger",
+      "semantic readiness gating",
+      "request priority/deadline at provider boundary",
+      "resource envelope intent",
+      "load/serve/drain/unload lifecycle intent",
+      "runtime observation with provenance",
+      "physical reclaim qualification",
+      "fault and driver-health adjudication"
+    ],
+    "modeld_must_not_own": [
+      "CPU/GPU layer placement",
+      "expert placement",
+      "KV block allocation/eviction/compression",
+      "radix/paged cache mutation",
+      "CUDA virtual page mapping",
+      "token-level batch construction",
+      "kernel selection"
+    ]
+  },
+  "final_state": "OBSERVABILITY_PROMOTED_MATERIALIZATION_REJECTED",
+  "next_program": "IMPLEMENT_ENGINE_PROVIDER_ADAPTERS_BEHIND_NON_PRODUCTION_GATE"
+}

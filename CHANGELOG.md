@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.8.0 - 2026-10-07
+
+modeld promotion boundary ratification.
+
+- close Q-008 as OBSERVABILITY_PROMOTED / MATERIALIZATION_REJECTED;
+- promote cross-engine runtime observability as an implementation contract;
+- promote EngineProvider lifecycle and resource-envelope intent only to a non-production experimental implementation program;
+- reject generic supervisor authority over CPU/GPU layers, experts, KV blocks, virtual pages, token batches, and kernel selection;
+- ratify semantic readiness, provenance-bearing observations, unload/reclaim separation, and driver-health adjudication as supervisor responsibilities;
+- close the original Q-001 through Q-008 research sequence.
+
 ## 0.7.0 - 2026-10-07
 
 EngineProvider v0 contract qualification.
