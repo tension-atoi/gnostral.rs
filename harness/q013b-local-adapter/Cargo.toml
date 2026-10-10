@@ -1,0 +1,15 @@
+[package]
+name = "gnostral-q013b-local-adapter"
+version = "0.0.1"
+edition = "2021"
+license = "MIT"
+publish = false
+
+[dependencies]
+sha2 = "=0.10.9"
+libc = "0.2"
+gnostral-engine-provider-contract = { path = "../engine-provider-contract" }
+
+[[bin]]
+name = "q013b-fixture"
+path = "src/bin/q013b-fixture.rs"

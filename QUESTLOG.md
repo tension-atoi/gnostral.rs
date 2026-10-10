@@ -13,6 +13,6 @@ The quest log is the public execution order for gnostral.rs. A quest is not a ge
 | Q-007 | ENGINE-PROVIDER-01 | CLOSED | Define an engine-neutral lifecycle/capability contract after Q-002–Q-006. |
 | Q-008 | MODELD-PROMOTION-GATE | CLOSED | Decide whether any residency authority deserves production promotion. |
 | Q-012 | NATIVE-INFERENCE-CAPABILITIES | CLOSED (FUNCTIONAL) | Qualify dense, Qwen3 embeddings and MoE as separate fresh servers on one SHA-pinned CUDA binary; retain the missing-residency-feature regression. |
-| Q-013 | EVIDENCE-BOUND-ADMISSION | Q013-A CLOSED (CONTRACT ONLY); Q013-B PENDING | Plan only exact Q-012 probes by SHA, model semantic/reclaim gates, and refuse general execution authority. |
+| Q-013 | EVIDENCE-BOUND-ADMISSION | Q013-A CLOSED; Q013B-FIXTURE PASS; Q013B-REAL-ENGINE PENDING | Plan exact Q-012 probes and qualify a bounded disposable CPU subprocess; real inference authority remains gated. |
 
 A quest closes only when its protocol was frozen before the decisive run, evidence is retained, negative observations remain visible, non-claims are explicit, and upstream / patched-upstream / lab-owned behavior are separated.

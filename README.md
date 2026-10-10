@@ -50,11 +50,19 @@ The MIT-licensed [lab-owned expert-residency crate](crates/gnostral-expert-resid
 
 ## Q-013 — evidence-bound admission (contract only)
 
-Q-013-A extends the dependency-free EngineProvider v0 reference model with **probe-only** selection and lifecycle gates tied to the exact Q-012 public receipt. It produces three informational plans; none grants execution rights, authorizes arbitrary prompts or claims fresh host memory headroom. The remaining runtime adapter and live isolation gates are explicitly pending.
+Q-013-A extends the dependency-free EngineProvider v0 reference model with **probe-only** selection and lifecycle gates tied to the exact Q-012 public receipt. It produces three informational plans; none grants execution rights, authorizes arbitrary prompts or claims fresh host memory headroom. An isolated disposable subprocess fixture is now qualified under Q-013B; real model-runtime integration and GPU reclaim qualification remain pending.
 
 - [Q-013 quest and qualification boundaries](quests/Q-013-EVIDENCE-BOUND-ADMISSION.md)
 - [Machine-readable exact probe plans](evidence/runs/gnostral-q013-exact-probe-plans-20261010.json)
 - [Reference Rust contract](harness/engine-provider-contract/src/q013.rs) and [offline evidence replay](harness/experiments/q013_evidence_replay.py)
+
+## Q-013B — isolated process fixture (bounded qualification)
+
+A new [Rust subprocess harness](harness/q013b-local-adapter/) executes a **single SHA-pinned, CPU-only disposable test binary** after verifying the user's real systemd cgroup bounds. It enforces fixed arguments, private executable snapshots, strict output predicates, timeout/cancellation with process-group kill, and observed CPU cgroup resource return. Outside the protected lab scope, the boundary probe rejects execution with exit 73. The real inference adapter is **not** qualified.
+
+- [Fixture qualification and remaining engine gates](quests/Q-013B-ISOLATED-FIXTURE.md)
+- [Sanitized subprocess evidence](evidence/runs/gnostral-q013b-fixture-process-20261010.json)
+- [Fail-closed evidence audit](harness/experiments/q013b_fixture_audit.py)
 
 ## License
 

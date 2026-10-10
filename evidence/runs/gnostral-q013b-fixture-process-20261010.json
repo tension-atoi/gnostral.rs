@@ -1,0 +1,125 @@
+{
+  "boundary": {
+    "bounded_scope_accepted": true,
+    "unwrapped_scope_refused_code": 73
+  },
+  "fixture_binary_sha256": "60dee3e056d442ac779edb6f799f2d2926c6916e636752de4183b2bf12955c40",
+  "generated_utc": "2026-10-10T11:37:57.421099+00:00",
+  "not_qualified": [
+    "real Q-012 model adapter",
+    "GPU VRAM reclaim",
+    "production inference",
+    "multi-model residency",
+    "arbitrary process execution permission",
+    "integrity against a malicious process with the same user ID",
+    "signed semantic attestation independent of this fixture"
+  ],
+  "observed_process_runs": 8,
+  "private_source_logs_sha256": {
+    "boundary-inside.log": "4735de073095a68b3bf3ca6f21ee7e639b23849d04579fe8ce68449de70821d0",
+    "boundary-outside-exit-code.txt": "c6ebc76be5dc1f8b433f8d6fd9bd85cd9325086038442db8614bb799fec6fd85",
+    "boundary-outside.log": "ffac25a48be1063768d0a47b64d4ad204bfd6821d36e533a7f0d686fded2da69",
+    "isolation-e2e-test-qualified.log": "c54166c2d9d1227b926de4b42d91054525778ea64d70b236b298ecc2fda0f25a"
+  },
+  "qualified": [
+    "CPU-only fixture subprocess",
+    "SHA-pinned isolated executable snapshot",
+    "bounded timeout/cancellation with process-group kill",
+    "exact marker oracle rejection",
+    "observed CPU cgroup reclaim"
+  ],
+  "runs": {
+    "Q013B_DENSE=GNOSTRAL": {
+      "bounded_cpu_reclaim": true,
+      "cpu_cgroup_memory_after_bytes": 25182208,
+      "cpu_cgroup_memory_before_bytes": 38084608,
+      "cpu_cgroup_swap_after_bytes": 0,
+      "cpu_cgroup_swap_before_bytes": 0,
+      "duration_ms": 50,
+      "group_killed": false,
+      "oom_events_unchanged": true,
+      "outcome": "ProbePass"
+    },
+    "Q013B_EMBEDDING=3x1024_FINITE": {
+      "bounded_cpu_reclaim": true,
+      "cpu_cgroup_memory_after_bytes": 25260032,
+      "cpu_cgroup_memory_before_bytes": 20439040,
+      "cpu_cgroup_swap_after_bytes": 0,
+      "cpu_cgroup_swap_before_bytes": 0,
+      "duration_ms": 50,
+      "group_killed": false,
+      "oom_events_unchanged": true,
+      "outcome": "ProbePass"
+    },
+    "Q013B_MOE=CPU_EXPERTS": {
+      "bounded_cpu_reclaim": true,
+      "cpu_cgroup_memory_after_bytes": 25563136,
+      "cpu_cgroup_memory_before_bytes": 20541440,
+      "cpu_cgroup_swap_after_bytes": 0,
+      "cpu_cgroup_swap_before_bytes": 0,
+      "duration_ms": 50,
+      "group_killed": false,
+      "oom_events_unchanged": true,
+      "outcome": "ProbePass"
+    },
+    "cancel": {
+      "bounded_cpu_reclaim": true,
+      "cpu_cgroup_memory_after_bytes": 24129536,
+      "cpu_cgroup_memory_before_bytes": 19156992,
+      "cpu_cgroup_swap_after_bytes": 0,
+      "cpu_cgroup_swap_before_bytes": 0,
+      "duration_ms": 60,
+      "group_killed": true,
+      "oom_events_unchanged": true,
+      "outcome": "Cancelled"
+    },
+    "invalid_output": {
+      "bounded_cpu_reclaim": true,
+      "cpu_cgroup_memory_after_bytes": 23646208,
+      "cpu_cgroup_memory_before_bytes": 18825216,
+      "cpu_cgroup_swap_after_bytes": 0,
+      "cpu_cgroup_swap_before_bytes": 0,
+      "duration_ms": 50,
+      "group_killed": false,
+      "oom_events_unchanged": true,
+      "outcome": "SemanticReject"
+    },
+    "process_exit_23": {
+      "bounded_cpu_reclaim": true,
+      "cpu_cgroup_memory_after_bytes": 23638016,
+      "cpu_cgroup_memory_before_bytes": 19189760,
+      "cpu_cgroup_swap_after_bytes": 0,
+      "cpu_cgroup_swap_before_bytes": 0,
+      "duration_ms": 50,
+      "group_killed": false,
+      "oom_events_unchanged": true,
+      "outcome": "ProcessFailed"
+    },
+    "timeout": {
+      "bounded_cpu_reclaim": true,
+      "cpu_cgroup_memory_after_bytes": 23617536,
+      "cpu_cgroup_memory_before_bytes": 20766720,
+      "cpu_cgroup_swap_after_bytes": 0,
+      "cpu_cgroup_swap_before_bytes": 0,
+      "duration_ms": 151,
+      "group_killed": true,
+      "oom_events_unchanged": true,
+      "outcome": "TimedOut"
+    },
+    "timeout_descendant": {
+      "bounded_cpu_reclaim": true,
+      "cpu_cgroup_memory_after_bytes": 24190976,
+      "cpu_cgroup_memory_before_bytes": 19578880,
+      "cpu_cgroup_swap_after_bytes": 0,
+      "cpu_cgroup_swap_before_bytes": 0,
+      "duration_ms": 221,
+      "group_killed": true,
+      "oom_events_unchanged": true,
+      "outcome": "TimedOut"
+    }
+  },
+  "schema": "gnostral.q013b.fixture-process-qualification.v1",
+  "source_q012_public_receipt_sha256": "48241e35df171941e5d80a8f3832a55642de43d96abad04c0a000208e1cd3164",
+  "test_cases": 11,
+  "verdict": "Q013B_FIXTURE_PROCESS_CONTAINMENT_PASS"
+}
