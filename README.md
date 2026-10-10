@@ -48,6 +48,14 @@ On the bounded RTX 3070 reference host, **one exact Rust/CUDA executable** passe
 
 The MIT-licensed [lab-owned expert-residency crate](crates/gnostral-expert-residency/) is included (10 local crate tests pass). The reproduction recipe additionally requires locally prepared third-party vendored sources and a `gnu6-lab-run` systemd launch guard; it intentionally does not distribute raw model weights, private embedding vectors or upstream vendor subtrees.
 
+## Q-013 — evidence-bound admission (contract only)
+
+Q-013-A extends the dependency-free EngineProvider v0 reference model with **probe-only** selection and lifecycle gates tied to the exact Q-012 public receipt. It produces three informational plans; none grants execution rights, authorizes arbitrary prompts or claims fresh host memory headroom. The remaining runtime adapter and live isolation gates are explicitly pending.
+
+- [Q-013 quest and qualification boundaries](quests/Q-013-EVIDENCE-BOUND-ADMISSION.md)
+- [Machine-readable exact probe plans](evidence/runs/gnostral-q013-exact-probe-plans-20261010.json)
+- [Reference Rust contract](harness/engine-provider-contract/src/q013.rs) and [offline evidence replay](harness/experiments/q013_evidence_replay.py)
+
 ## License
 
 Original gnostral.rs material is MIT licensed. Vendored, adapted, or derived third-party material is not relicensed by this repository. Its original license and provenance must be preserved.

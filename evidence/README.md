@@ -7,3 +7,5 @@ Do not commit credentials or tokens, user data, private host inventory unrelated
 Prefer compact machine-readable summaries plus checksums for externally hosted or reproducible large artifacts.
 
 Q-012's sanitized, SHA-256-attributed [three-family functional qualification](runs/gnostral-q012-native-three-families-20261010.json) includes the negative MoE feature-omission witness, per-family bounded memory observations, and the digest of each retained private source receipt. Its raw logs and embedding vectors are intentionally not committed.
+
+Q-013-A [evidence-bound probe plans](runs/gnostral-q013-exact-probe-plans-20261010.json) are derived from the pinned Q-012 public receipt; every plan has `execution_authorized=false`. They are offline contract fixtures, not new runtime qualifications or executable access grants.

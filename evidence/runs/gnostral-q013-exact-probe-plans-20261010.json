@@ -1,0 +1,47 @@
+{
+  "limits": [
+    "informational reference model only; never grants execution",
+    "one-shot exact functional probes, not arbitrary user requests",
+    "historical GPU card peaks are observations, not admission budgets",
+    "no live host health, memory headroom, or production-readiness qualification"
+  ],
+  "plan_count": 3,
+  "plans": [
+    {
+      "engine_sha256": "64eec222ccefff4cd4c0067bd83348f1d22eebda27d0d857e352ee090cf19723",
+      "evidence_ref": "sha256:48241e35df171941e5d80a8f3832a55642de43d96abad04c0a000208e1cd3164",
+      "execution_authorized": false,
+      "model_sha256": "c1b9b30e907950516ba3c646bdf570d8084c25a6410a0cdca80cf04b11bc13a8",
+      "observed_card_gpu_peak_mib": 5025,
+      "operation": "DenseSentinel",
+      "profile": "Q012_SEQUENTIAL_FUNCTIONAL",
+      "qualification": "Qualified",
+      "serving_mode": "OneShot"
+    },
+    {
+      "engine_sha256": "64eec222ccefff4cd4c0067bd83348f1d22eebda27d0d857e352ee090cf19723",
+      "evidence_ref": "sha256:48241e35df171941e5d80a8f3832a55642de43d96abad04c0a000208e1cd3164",
+      "execution_authorized": false,
+      "model_sha256": "0437e45c94563b09e13cb7a64478fc406947a93cb34a7e05870fc8dcd48e23fd",
+      "observed_card_gpu_peak_mib": 2783,
+      "operation": "EmbeddingTriple1024",
+      "profile": "Q012_SEQUENTIAL_FUNCTIONAL",
+      "qualification": "Qualified",
+      "serving_mode": "OneShot"
+    },
+    {
+      "engine_sha256": "64eec222ccefff4cd4c0067bd83348f1d22eebda27d0d857e352ee090cf19723",
+      "evidence_ref": "sha256:48241e35df171941e5d80a8f3832a55642de43d96abad04c0a000208e1cd3164",
+      "execution_authorized": false,
+      "model_sha256": "db3ce897ccc9e7d9dbf17fe083cae7880a2092aa473b45eba8b77715aa9ca170",
+      "observed_card_gpu_peak_mib": 2427,
+      "operation": "MoeExpertSentence",
+      "profile": "Q012_SEQUENTIAL_FUNCTIONAL",
+      "qualification": "Qualified",
+      "serving_mode": "OneShot"
+    }
+  ],
+  "q012_source_sha256": "48241e35df171941e5d80a8f3832a55642de43d96abad04c0a000208e1cd3164",
+  "schema": "gnostral.q013.evidence-bound-plans.v1",
+  "verdict": "EXACT_PROBE_PLANS_ONLY"
+}

@@ -3,6 +3,8 @@
 //! This crate is intentionally dependency-free. It models authority and
 //! evidence boundaries; it is not an inference runtime.
 
+pub mod q013;
+
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub enum Fact<T> {
     Unknown { reason: String },
