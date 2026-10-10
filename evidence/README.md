@@ -11,3 +11,5 @@ Q-012's sanitized, SHA-256-attributed [three-family functional qualification](ru
 Q-013-A [evidence-bound probe plans](runs/gnostral-q013-exact-probe-plans-20261010.json) are derived from the pinned Q-012 public receipt; every plan has `execution_authorized=false`. They are offline contract fixtures, not new runtime qualifications or executable access grants.
 
 Q-013B's [CPU fixture containment receipt](runs/gnostral-q013b-fixture-process-20261010.json) contains eight bounded-process observations, an actual negative outside-scope check, and digests of private source logs. It does not qualify GPU reclaim, real inference, arbitrary executable admission or production supervision.
+
+Q-013C's [real-dense single-server receipt](runs/gnostral-q013c-real-dense-single-server-20261010.json) is from an actual bounded Qwen2.5-Coder inference and an independent local rehash/oracle audit. It excludes the privately retained engine log and full response. It does not qualify multi-family routing, authenticated third-party semantic witnesses, or production.

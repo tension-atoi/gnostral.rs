@@ -1,0 +1,31 @@
+{
+  "bounded_scope": true,
+  "completion_tokens": 4,
+  "exact_engine_sha256": "64eec222ccefff4cd4c0067bd83348f1d22eebda27d0d857e352ee090cf19723",
+  "exact_weight_sha256": "c1b9b30e907950516ba3c646bdf570d8084c25a6410a0cdca80cf04b11bc13a8",
+  "gpu_ambient_delta_mib": 8,
+  "gpu_card_after_mib": 689,
+  "gpu_card_before_mib": 681,
+  "model_family": "dense",
+  "model_weight_rehashed_independently": true,
+  "nonclaims": [
+    "generalized semantic quality",
+    "MoE or embedding runtime integration",
+    "persistent/multi-model service",
+    "production supervisor",
+    "authenticated external semantic authority",
+    "NVIDIA VRAM pinning/isolation",
+    "hardware or OS security boundary"
+  ],
+  "private_audit_sha256": "4422c28cddb3fcb599642f2cac6c2ed448c4ea3c2fc14cf333f57adb6bc95204",
+  "process_reaped": true,
+  "publication_note": "One bounded, ephemeral dense engine server; independent local offline audit; not multi-family adapter promotion",
+  "q012_public_source_sha256": "48241e35df171941e5d80a8f3832a55642de43d96abad04c0a000208e1cd3164",
+  "real_server": true,
+  "response_file_sha256": "a09fea6bed45742648a3349d0d5aef40cf1033226d6f0960e8a5954016268964",
+  "runtime_wall_s": 16.829,
+  "schema": "gnostral.q013c.independent-real-dense-audit.v1",
+  "semantic_oracle": "exact uppercase GNOSTRAL",
+  "session_sha256": "7ddbe10351aefef613e538a66b029a669ba1dd5bf8acc5985f7ddd274278814b",
+  "verdict": "Q013C_REAL_DENSE_SINGLE_SERVER_PASS"
+}

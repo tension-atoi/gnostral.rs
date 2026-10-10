@@ -64,6 +64,18 @@ A new [Rust subprocess harness](harness/q013b-local-adapter/) executes a **singl
 - [Sanitized subprocess evidence](evidence/runs/gnostral-q013b-fixture-process-20261010.json)
 - [Fail-closed evidence audit](harness/experiments/q013b_fixture_audit.py)
 
+## Q-013C — real Rust/CUDA dense pilot (single server)
+
+The first real inference adapter pilot is qualified **only** for one exact SHA-pinned Qwen2.5-Coder-1.5B server under the guarded lab scope. It verifies the local CUDA executable and model weights, performs a bounded semantic request, reaps the owned process and independently rehashes the inputs before accepting the exact GNOSTRAL output. The GPU card returned to +8 MiB of its initial ambient memory. This is **not** persistent serving, hot swap, or multi-model qualification.
+
+- [Q-013C qualification and precise limits](quests/Q-013C-REAL-DENSE-PILOT.md)
+- [Public real-dense audit receipt](evidence/runs/gnostral-q013c-real-dense-single-server-20261010.json)
+- [Pinned real-model pilot](harness/experiments/q013c_real_dense.py), [independent auditor](harness/experiments/q013c_independent_audit.py), and [negative gates](harness/experiments/test_q013c_independent_audit.py)
+
+## Upstream research intake — 2026-10-10
+
+The [Rust Inference Watch and experiment gates](research/runtime/RUST-INFERENCE-WATCH-20261010.md) verify upstream Burn Remote v5 / Flex FP8+FP4, Ferrum opt-in SLO scheduling and CubeCL CUDA multi-GPU ordering by exact commit. They are **research candidates only**; none has been integrated or qualified locally. Proposed investigation order: Burn loopback quantized transfer → Ferrum client-side SLO measurements → CubeCL physical multi-GPU conditional gate.
+
 ## License
 
 Original gnostral.rs material is MIT licensed. Vendored, adapted, or derived third-party material is not relicensed by this repository. Its original license and provenance must be preserved.
