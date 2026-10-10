@@ -1,0 +1,321 @@
+{
+  "aggregate": {
+    "baseline": {
+      "max_absolute_reclaim_delta_mib": 82,
+      "median_host_rss_peak_mib": 22093.58984375,
+      "median_hot_stream_ttft_ms": 3817.883,
+      "median_peak_gpu_total_mib": 2344,
+      "median_prefill_ms": {
+        "128": 3636.0,
+        "512": 7248.0
+      },
+      "median_tps": {
+        "128": 8.896492,
+        "512": 9.506482
+      }
+    },
+    "candidate": {
+      "max_absolute_reclaim_delta_mib": 25,
+      "median_host_rss_peak_mib": 22172.16796875,
+      "median_hot_stream_ttft_ms": 1422.398,
+      "median_peak_gpu_total_mib": 2351,
+      "median_prefill_ms": {
+        "128": 1442.0,
+        "512": 2676.0
+      },
+      "median_tps": {
+        "128": 21.931675,
+        "512": 20.179588
+      }
+    }
+  },
+  "binary_sha256": {
+    "baseline": "67743dbbbb04eca14498f8c79f57922e703111bbf80df7cdfc3918607a85ffb9",
+    "candidate": "dc11a9ad45574fea0565768bb877cd828b4ec7ee9eb1177537119959c42984c3"
+  },
+  "candidate_minus_baseline_gpu_total_peak_mib": 7,
+  "candidate_minus_baseline_host_rss_peak_mib": 78.578125,
+  "candidate_over_baseline_median_tps_ratios": {
+    "128": 2.465204824553318,
+    "512": 2.122718793345425
+  },
+  "failed_first_attempt": {
+    "candidate_post_reclaim_gpu_delta_mib": 196,
+    "completed": 2,
+    "path": "/mnt/hdd/lab/sessions/gnostral-q010-cpu-moe-hotpath-20261010",
+    "root_cause": "undetermined, potentially desktop GPU traffic",
+    "status": "NOT_QUALIFIED"
+  },
+  "host_driver_evidence": {
+    "NVRM_or_Xid": [],
+    "journal_rc": 0,
+    "pass": true,
+    "scope": "host kernel journal only, not per-process NVIDIA driver attestation"
+  },
+  "limitations": [
+    "only 3 processes per engine; descriptive, not general model speed guarantee",
+    "first attempt failed post-release GPU ambient gate and is retained without changing thresholds",
+    "third paired 512-token response differs from first two but remains identical within its own baseline/candidate pair",
+    "source unit tests prove Q2K/Q3K numerical parity on controlled cases, not exhaustive unsafe memory correctness",
+    "per-route copy count, PSS, PCIe transfer volume and allocation profiling not recorded",
+    "RSS includes mapped/shared pages, GPU total includes graphics desktop and sampling may miss short peaks",
+    "TTFT measured on separate warm request, not identical cold inference",
+    "no product, modeld, production, remote push or docs publication authorized"
+  ],
+  "measured_responses": 12,
+  "model_sha256_post_run": "db3ce897ccc9e7d9dbf17fe083cae7880a2092aa473b45eba8b77715aa9ca170",
+  "paired_byte_identical_responses": [
+    {
+      "budget": 128,
+      "identical_bytes": true,
+      "repeat": 1,
+      "sha256": "74e0a51850645becd611156d921c04832a0a9e09a6580ef5965f84722a47d2c6"
+    },
+    {
+      "budget": 128,
+      "identical_bytes": true,
+      "repeat": 2,
+      "sha256": "74e0a51850645becd611156d921c04832a0a9e09a6580ef5965f84722a47d2c6"
+    },
+    {
+      "budget": 128,
+      "identical_bytes": true,
+      "repeat": 3,
+      "sha256": "74e0a51850645becd611156d921c04832a0a9e09a6580ef5965f84722a47d2c6"
+    },
+    {
+      "budget": 512,
+      "identical_bytes": true,
+      "repeat": 1,
+      "sha256": "010fcaa1b96d0d7a970eafc190a81e088c50491a55ca455d381edfbf49533fa1"
+    },
+    {
+      "budget": 512,
+      "identical_bytes": true,
+      "repeat": 2,
+      "sha256": "010fcaa1b96d0d7a970eafc190a81e088c50491a55ca455d381edfbf49533fa1"
+    },
+    {
+      "budget": 512,
+      "identical_bytes": true,
+      "repeat": 3,
+      "sha256": "084a0b7914458c8102f5987b372a45a0f1a53e0296d5bcc77cdbdfa94d79b692"
+    }
+  ],
+  "per_request": [
+    {
+      "budget": 128,
+      "decode_tps": 8.896492,
+      "engine": "baseline",
+      "generated_tokens": 52,
+      "gpu_ambient_before_mib": 1286,
+      "gpu_peak_total_mib": 2344,
+      "host_rss_peak_mib": 22093.58984375,
+      "hot_stream_ttft_ms": 3583.554,
+      "post_reclaim_delta_mib": -16,
+      "prefill_ms": 3636.0,
+      "repeat": 1,
+      "response_sha256": "74e0a51850645becd611156d921c04832a0a9e09a6580ef5965f84722a47d2c6"
+    },
+    {
+      "budget": 512,
+      "decode_tps": 10.123027,
+      "engine": "baseline",
+      "generated_tokens": 209,
+      "gpu_ambient_before_mib": 1286,
+      "gpu_peak_total_mib": 2344,
+      "host_rss_peak_mib": 22093.58984375,
+      "hot_stream_ttft_ms": null,
+      "post_reclaim_delta_mib": -16,
+      "prefill_ms": 6941.0,
+      "repeat": 1,
+      "response_sha256": "010fcaa1b96d0d7a970eafc190a81e088c50491a55ca455d381edfbf49533fa1"
+    },
+    {
+      "budget": 128,
+      "decode_tps": 8.489796,
+      "engine": "baseline",
+      "generated_tokens": 52,
+      "gpu_ambient_before_mib": 1306,
+      "gpu_peak_total_mib": 2329,
+      "host_rss_peak_mib": 21953.02734375,
+      "hot_stream_ttft_ms": 3817.883,
+      "post_reclaim_delta_mib": -82,
+      "prefill_ms": 3631.0,
+      "repeat": 2,
+      "response_sha256": "74e0a51850645becd611156d921c04832a0a9e09a6580ef5965f84722a47d2c6"
+    },
+    {
+      "budget": 512,
+      "decode_tps": 9.506482,
+      "engine": "baseline",
+      "generated_tokens": 209,
+      "gpu_ambient_before_mib": 1306,
+      "gpu_peak_total_mib": 2329,
+      "host_rss_peak_mib": 21953.02734375,
+      "hot_stream_ttft_ms": null,
+      "post_reclaim_delta_mib": -82,
+      "prefill_ms": 7248.0,
+      "repeat": 2,
+      "response_sha256": "010fcaa1b96d0d7a970eafc190a81e088c50491a55ca455d381edfbf49533fa1"
+    },
+    {
+      "budget": 128,
+      "decode_tps": 9.880296,
+      "engine": "baseline",
+      "generated_tokens": 52,
+      "gpu_ambient_before_mib": 1224,
+      "gpu_peak_total_mib": 2346,
+      "host_rss_peak_mib": 22158.3515625,
+      "hot_stream_ttft_ms": 4036.113,
+      "post_reclaim_delta_mib": 26,
+      "prefill_ms": 4019.0,
+      "repeat": 3,
+      "response_sha256": "74e0a51850645becd611156d921c04832a0a9e09a6580ef5965f84722a47d2c6"
+    },
+    {
+      "budget": 512,
+      "decode_tps": 9.505421,
+      "engine": "baseline",
+      "generated_tokens": 192,
+      "gpu_ambient_before_mib": 1224,
+      "gpu_peak_total_mib": 2346,
+      "host_rss_peak_mib": 22158.3515625,
+      "hot_stream_ttft_ms": null,
+      "post_reclaim_delta_mib": 26,
+      "prefill_ms": 7265.0,
+      "repeat": 3,
+      "response_sha256": "084a0b7914458c8102f5987b372a45a0f1a53e0296d5bcc77cdbdfa94d79b692"
+    },
+    {
+      "budget": 128,
+      "decode_tps": 21.549938,
+      "engine": "candidate",
+      "generated_tokens": 52,
+      "gpu_ambient_before_mib": 1270,
+      "gpu_peak_total_mib": 2337,
+      "host_rss_peak_mib": 21560.1875,
+      "hot_stream_ttft_ms": 1570.176,
+      "post_reclaim_delta_mib": 12,
+      "prefill_ms": 1442.0,
+      "repeat": 1,
+      "response_sha256": "74e0a51850645becd611156d921c04832a0a9e09a6580ef5965f84722a47d2c6"
+    },
+    {
+      "budget": 512,
+      "decode_tps": 20.179588,
+      "engine": "candidate",
+      "generated_tokens": 209,
+      "gpu_ambient_before_mib": 1270,
+      "gpu_peak_total_mib": 2337,
+      "host_rss_peak_mib": 21560.1875,
+      "hot_stream_ttft_ms": null,
+      "post_reclaim_delta_mib": 12,
+      "prefill_ms": 2552.0,
+      "repeat": 1,
+      "response_sha256": "010fcaa1b96d0d7a970eafc190a81e088c50491a55ca455d381edfbf49533fa1"
+    },
+    {
+      "budget": 128,
+      "decode_tps": 21.931675,
+      "engine": "candidate",
+      "generated_tokens": 52,
+      "gpu_ambient_before_mib": 1281,
+      "gpu_peak_total_mib": 2351,
+      "host_rss_peak_mib": 22172.16796875,
+      "hot_stream_ttft_ms": 1408.52,
+      "post_reclaim_delta_mib": 25,
+      "prefill_ms": 1359.0,
+      "repeat": 2,
+      "response_sha256": "74e0a51850645becd611156d921c04832a0a9e09a6580ef5965f84722a47d2c6"
+    },
+    {
+      "budget": 512,
+      "decode_tps": 20.206903,
+      "engine": "candidate",
+      "generated_tokens": 209,
+      "gpu_ambient_before_mib": 1281,
+      "gpu_peak_total_mib": 2351,
+      "host_rss_peak_mib": 22172.16796875,
+      "hot_stream_ttft_ms": null,
+      "post_reclaim_delta_mib": 25,
+      "prefill_ms": 2676.0,
+      "repeat": 2,
+      "response_sha256": "010fcaa1b96d0d7a970eafc190a81e088c50491a55ca455d381edfbf49533fa1"
+    },
+    {
+      "budget": 128,
+      "decode_tps": 22.015242,
+      "engine": "candidate",
+      "generated_tokens": 52,
+      "gpu_ambient_before_mib": 1249,
+      "gpu_peak_total_mib": 2358,
+      "host_rss_peak_mib": 22175.0703125,
+      "hot_stream_ttft_ms": 1422.398,
+      "post_reclaim_delta_mib": -12,
+      "prefill_ms": 1508.0,
+      "repeat": 3,
+      "response_sha256": "74e0a51850645becd611156d921c04832a0a9e09a6580ef5965f84722a47d2c6"
+    },
+    {
+      "budget": 512,
+      "decode_tps": 19.484474,
+      "engine": "candidate",
+      "generated_tokens": 192,
+      "gpu_ambient_before_mib": 1249,
+      "gpu_peak_total_mib": 2358,
+      "host_rss_peak_mib": 22175.0703125,
+      "hot_stream_ttft_ms": null,
+      "post_reclaim_delta_mib": -12,
+      "prefill_ms": 2977.0,
+      "repeat": 3,
+      "response_sha256": "084a0b7914458c8102f5987b372a45a0f1a53e0296d5bcc77cdbdfa94d79b692"
+    }
+  ],
+  "predeclared_gates": {
+    "all_six_reclaim_and_driver_checks_pass": true,
+    "candidate_median_tps_ratio_minimum": 1.1,
+    "inference_quality_cannot_be_determined_from_tps": true,
+    "max_allowed_increase_gpu_peak_mib": 128,
+    "max_allowed_increase_host_rss_mib": 512,
+    "same_or_equivalent_full_text_outputs": true
+  },
+  "process_runs": 6,
+  "raw_artifacts_sha256": {
+    "01-baseline-128-response.txt": "74e0a51850645becd611156d921c04832a0a9e09a6580ef5965f84722a47d2c6",
+    "01-baseline-512-response.txt": "010fcaa1b96d0d7a970eafc190a81e088c50491a55ca455d381edfbf49533fa1",
+    "01-baseline.json": "ff140d545e3a47214e04a831848281619d302e7d16e249c24005aed9febf62dc",
+    "01-baseline.server.log": "3297fd481095ca63c4c88060d03e288e2cafaa86059bfda5add36105d2b93fbd",
+    "01-candidate-128-response.txt": "74e0a51850645becd611156d921c04832a0a9e09a6580ef5965f84722a47d2c6",
+    "01-candidate-512-response.txt": "010fcaa1b96d0d7a970eafc190a81e088c50491a55ca455d381edfbf49533fa1",
+    "01-candidate.json": "e3dc4a2aefb31db36edaf0611da00de4e03c72cd593a2e91af302becfb8de5ca",
+    "01-candidate.server.log": "e4e67586cb44bd523e59be469f3164699bbcbc7e48baf9f4f852ce8b9ffbf425",
+    "02-baseline-128-response.txt": "74e0a51850645becd611156d921c04832a0a9e09a6580ef5965f84722a47d2c6",
+    "02-baseline-512-response.txt": "010fcaa1b96d0d7a970eafc190a81e088c50491a55ca455d381edfbf49533fa1",
+    "02-baseline.json": "9a90e5fd818eb2117eeded4207ed84891136081d941c7c5c4b9cba3c274126eb",
+    "02-baseline.server.log": "421d5c03a349aac1f160347b8f782ac55b9f8030d15576d0a0996e6f690f52fe",
+    "02-candidate-128-response.txt": "74e0a51850645becd611156d921c04832a0a9e09a6580ef5965f84722a47d2c6",
+    "02-candidate-512-response.txt": "010fcaa1b96d0d7a970eafc190a81e088c50491a55ca455d381edfbf49533fa1",
+    "02-candidate.json": "b18caabe1239a96c26cf8fe8647e4c555e554044df13a67fbab01b14f9463322",
+    "02-candidate.server.log": "d63266b5dbc7958b3ac18fd43d3d5afb0730b6d00e2618b0d801ec77de482bac",
+    "03-baseline-128-response.txt": "74e0a51850645becd611156d921c04832a0a9e09a6580ef5965f84722a47d2c6",
+    "03-baseline-512-response.txt": "084a0b7914458c8102f5987b372a45a0f1a53e0296d5bcc77cdbdfa94d79b692",
+    "03-baseline.json": "b05fafc50ce062dc3b99a0c5e8287603ab5acd73db3a3faabe24f16cb1ca3451",
+    "03-baseline.server.log": "b30e44fc143eead760cd820420d8776f49422d8df139317d4ca0ad2789c19dd3",
+    "03-candidate-128-response.txt": "74e0a51850645becd611156d921c04832a0a9e09a6580ef5965f84722a47d2c6",
+    "03-candidate-512-response.txt": "084a0b7914458c8102f5987b372a45a0f1a53e0296d5bcc77cdbdfa94d79b692",
+    "03-candidate.json": "7cd78379ae2ac2f3439b010326d0f1700298df785d822cb1964d419312ffff89",
+    "03-candidate.server.log": "4569342217a8c4d554738ec94633896f44b167096d25d96f8280dace8a7578f3",
+    "RETEST-CONTRACT.json": "13158cd9cb0faad4798762f3cea778fd09bebc23c6e87877836bda19e3c23277",
+    "candidate_ab_retest.py": "158b50cc13a39969cc66680e81a924b7d493ff1de0e45f28ee4d2dc3c97f5449",
+    "frozen-protocol.json": "8400dd06c5a88045d8a5282cdf118060fe5e6aca3e9a67419866bc909c8e474f",
+    "retest-controller.log": "7d11aa02ab8229904d65958cc4d0619f101b193aa8d9aae3f987f51d67d13766",
+    "summary.json": "17d21767dcd3affb9f4b788fa1bc8160fb44204f2e6b69767cdc46de3ddeb199"
+  },
+  "retest_session": "/mnt/hdd/lab/sessions/gnostral-q010-cpu-moe-hotpath-retest-20261010",
+  "schema": "q010-cpu-borrowed-q2kq3k-ab-independent-audit-v1",
+  "source_commit": "67040aa",
+  "source_parity_receipt_sha256": "ebc58bd41d393b39d04c7383d47df3a7c69e9de9884635c962353e10de7adb25",
+  "status": "REPEATED_AB_PASS_INITIAL_FAILURE_RETAINED",
+  "time_utc": "2026-10-10T07:02:28.934399+00:00"
+}

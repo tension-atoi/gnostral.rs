@@ -7,3 +7,30 @@
 *.yaml text eol=lf
 *.json text eol=lf
 *.patch text eol=lf
+
+# Retained upstream patch payload: preserve exact whitespace bytes.
+patches/strata-residency/mistralrs.patch -whitespace
+
+# Byte-exact retained validation transcripts; preserve final blank lines.
+evidence/logs/strata-*.log -whitespace
+
+# Exact inference traces may retain ANSI/template trailing spaces.
+evidence/runs/strata-task4-*-probe-20261009/*.log -whitespace
+evidence/runs/strata-task4-candidate-semantic-20261009/*.log -whitespace
+
+# Retained mixed-device Qwen3 real-model traces may include ANSI/template spaces.
+evidence/runs/strata-task4-mixed-device-real-candidate-20261009/*.log -whitespace
+
+# Retain exact paired single-token math oracle logs.
+evidence/runs/strata-task4-paired-short-oracles-20261009/*.log -whitespace
+
+# Exact exploratory decode calibration runtime logs.
+evidence/runs/strata-task6-one-pair-calibration-20261009/*.log -whitespace
+
+# Byte-exact failed micro A/B runtime logs.
+evidence/runs/strata-task6-ab-micro3-20261009/*.log -whitespace
+
+
+# Incremental Q-010 upstream patch payloads retain exact diff-line whitespace.
+patches/strata-residency/candle-q010-cpu-expert-borrowed.patch -whitespace
+patches/strata-residency/mistralrs-q010-cpu-expert-borrowed.patch -whitespace

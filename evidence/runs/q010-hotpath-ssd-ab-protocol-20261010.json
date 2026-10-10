@@ -1,0 +1,51 @@
+{
+  "schema": "q010-strata-q2kq3k-cpu-borrowed-ab-v1",
+  "source_sha256": {
+    "model": "db3ce897ccc9e7d9dbf17fe083cae7880a2092aa473b45eba8b77715aa9ca170",
+    "strata": "67743dbbbb04eca14498f8c79f57922e703111bbf80df7cdfc3918607a85ffb9",
+    "llama": "8291521b7077047787c1617257c2f790bf377c1851b824f09064cd4195ab6be2",
+    "profile": "d586ef8092fa53b72086934f007a424bfb0a4a26d8783bc3a7439ffe5a9915d0",
+    "ollama_import": "0c9ccb6f83225157b66006fb3d86164b2df173582edbe701fd82cb1e95d6dae0"
+  },
+  "ctx_requested": 1024,
+  "seed": 42,
+  "threads": 8,
+  "repeats": 3,
+  "repetition_order": [
+    "baseline",
+    "candidate",
+    "candidate",
+    "baseline",
+    "baseline",
+    "candidate"
+  ],
+  "lengths": [
+    128,
+    512
+  ],
+  "prompts": {
+    "128": "In exactly two short sentences, explain one concrete benefit and one concrete drawback of keeping MoE expert weights in CPU RAM instead of GPU VRAM. Do not include headers or a list.",
+    "512": "Provide exactly six numbered, concise checks for benchmarking a local mixture-of-experts model on a GPU with 8 GiB VRAM. Each check must contain one practical criterion and one way to verify it. Cover these six topics in this order: GGUF identity hash, CPU versus GPU layer placement, GPU and host memory peaks, first-text latency, steady decode tokens per second, and generated-answer correctness. Stop immediately after item six."
+  },
+  "hypothesis": "Borrowed CPU Q2K/Q3K GGUF projections eliminate repeated packed-weight cloning and improve end-to-end MoE decode without shifting VRAM or host RSS",
+  "predeclared_success_gate": {
+    "candidate_median_tps_ratio_minimum": 1.1,
+    "same_or_equivalent_full_text_outputs": true,
+    "all_six_reclaim_and_driver_checks_pass": true,
+    "max_allowed_increase_gpu_peak_mib": 128,
+    "max_allowed_increase_host_rss_mib": 512,
+    "inference_quality_cannot_be_determined_from_tps": true
+  },
+  "interpretation": "n=3 descriptive A/B; speedup never generalized, no production promotion",
+  "candidate_optimization": "CPU Q2K Q3K borrowed expert projections, no per-route packed weight copy",
+  "comparison_target": "same original Strata binary vs only Q2K/Q3K CPU projection borrowed implementation, all other configs identical",
+  "TTFT": "first nonempty text in separate 128-token streamed request; NOT the same request as nonstream throughput",
+  "model_comparability": "same source GGUF and tokenizer, same Strata runtime configuration with one isolated source patch",
+  "deployment": "lab only; no permanent service; run serially; safe preflight/reclaim",
+  "memory": "sample whole-card used MiB and owned process tree RSS every .8s",
+  "quality": "raw text retained; early EOG and task adherence evaluated separately",
+  "biases": [
+    "3 repetitions insufficient for population inference",
+    "candidate binary revision fixed at benchmark start"
+  ]
+}

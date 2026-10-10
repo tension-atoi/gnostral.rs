@@ -1,0 +1,41 @@
+{
+  "schema": "gnostral.placement-evidence-secondary-audit.v1",
+  "status": "INDEPENDENT_RECOMPUTATION_PASS",
+  "validated_utc": "2026-10-10T08:12:52.043774+00:00",
+  "source_evidence_sha256": "b048df6ba0aff62ca06e99336dc95c0be6d3f0949ab7c92bc7a8e016088f7738",
+  "raw_artifacts_rehashed": 37,
+  "placements_recomputed": [
+    {
+      "mode": "control",
+      "rep": 1,
+      "gpu": 22
+    },
+    {
+      "mode": "control",
+      "rep": 2,
+      "gpu": 21
+    },
+    {
+      "mode": "control",
+      "rep": 3,
+      "gpu": 21
+    },
+    {
+      "mode": "pressure",
+      "rep": 1,
+      "gpu": 13
+    },
+    {
+      "mode": "pressure",
+      "rep": 2,
+      "gpu": 12
+    },
+    {
+      "mode": "pressure",
+      "rep": 3,
+      "gpu": 13
+    }
+  ],
+  "classification": "offline observability of startup decisions only",
+  "runtime_authority_granted": false
+}
