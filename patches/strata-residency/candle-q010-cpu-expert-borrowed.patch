@@ -1,0 +1,147 @@
+diff --git a/candle-core/src/quantized/mod.rs b/candle-core/src/quantized/mod.rs
+--- a/candle-core/src/quantized/mod.rs
++++ b/candle-core/src/quantized/mod.rs
+@@ -1082,6 +1082,85 @@
+         Self::new(QStorage::from_data(Cow::Borrowed(bytes), device, self.dtype())?, (rows, cols))
+     }
+ 
++    /// Copy-free CPU Q2_K/Q3_K projection of one expert in a GGUF stack.
++    ///
++    /// The input borrow and packed weight borrow stay alive through the
++    /// synchronous kernel. Other quantization types retain the fallback path.
++    pub fn cpu_expert_matmul_k(&self, expert: usize, xs: &Tensor) -> Result<Option<Tensor>> {
++        let dtype = self.dtype();
++        if !matches!(dtype, GgmlDType::Q2K | GgmlDType::Q3K)
++            || !xs.device().is_cpu()
++            || xs.dtype() != DType::F32
++        {
++            return Ok(None);
++        }
++        let QStorage::Cpu(weights) = &self.storage else {
++            return Ok(None);
++        };
++        let (experts, rows, cols) = self.shape.dims3()?;
++        if expert >= experts {
++            crate::bail!("expert index {expert} out of bounds ({experts})");
++        }
++        let (batch, xs_cols) = xs.dims2()?;
++        if batch != 1 || xs_cols != cols || !xs.is_contiguous() {
++            crate::bail!("expert projection expects contiguous [1, hidden] F32");
++        }
++        let src_storage = xs.storage();
++        let Storage::Cpu(input) = &*src_storage else {
++            return Ok(None);
++        };
++        let offset = xs.layout().start_offset();
++        let src = input.as_slice::<f32>()?;
++        let lhs = src.get(offset..offset + cols)
++            .ok_or_else(|| crate::Error::Msg("expert input truncated".into()))?;
++
++        fn borrowed_projection<T: GgmlType>(
++            weights: &dyn QuantizedType,
++            experts: usize,
++            expert: usize,
++            rows: usize,
++            cols: usize,
++            lhs: &[f32],
++        ) -> Result<Tensor> {
++            if cols % T::BLCK_SIZE != 0 {
++                crate::bail!("expert dimension is not quantization-block aligned");
++            }
++            let blocks_per_expert = rows.checked_mul(cols / T::BLCK_SIZE)
++                .ok_or_else(|| crate::Error::Msg("expert block size overflow".into()))?;
++            let blocks = blocks_per_expert.checked_mul(experts)
++                .ok_or_else(|| crate::Error::Msg("expert stack overflow".into()))?;
++            let expected_bytes = blocks.checked_mul(std::mem::size_of::<T>())
++                .ok_or_else(|| crate::Error::Msg("expert byte size overflow".into()))?;
++            if expected_bytes != weights.storage_size_in_bytes() {
++                crate::bail!("expert packed storage differs from declared geometry");
++            }
++            let base = weights.as_ptr();
++            if !(base as usize).is_multiple_of(std::mem::align_of::<T>()) {
++                crate::bail!("expert packed storage alignment mismatch");
++            }
++            // SAFETY: weights owns an immutable contiguous block allocation, kept
++            // alive by &self for the entire synchronous projection. Validated
++            // geometry, byte size, alignment and expert index bound the slice.
++            let all = unsafe { std::slice::from_raw_parts(base as *const T, blocks) };
++            let start = expert.checked_mul(blocks_per_expert)
++                .ok_or_else(|| crate::Error::Msg("expert range overflow".into()))?;
++            let selected = &all[start..start + blocks_per_expert];
++            let mut out = vec![0f32; rows];
++            k_quants::matmul((1, cols, rows), lhs, selected, &mut out)?;
++            Tensor::from_vec(out, (1, rows), &Device::Cpu)
++        }
++
++        Ok(Some(match dtype {
++            GgmlDType::Q2K => borrowed_projection::<BlockQ2K>(
++                weights.as_ref(), experts, expert, rows, cols, lhs,
++            )?,
++            GgmlDType::Q3K => borrowed_projection::<BlockQ3K>(
++                weights.as_ref(), experts, expert, rows, cols, lhs,
++            )?,
++            _ => unreachable!("dtype checked above"),
++        }))
++    }
++
+     /// Actual padded CUDA allocation, rather than logical packed byte length.
+     pub fn cuda_allocation_bytes(&self) -> Option<u64> {
+         #[cfg(feature = "cuda")]
+diff --git a/candle-core/tests/expert_residency_slice.rs b/candle-core/tests/expert_residency_slice.rs
+--- a/candle-core/tests/expert_residency_slice.rs
++++ b/candle-core/tests/expert_residency_slice.rs
+@@ -102,3 +102,54 @@
+     }
+     Ok(())
+ }
++
++#[test]
++fn q2k_copy_free_cpu_expert_projection_matches_owned_slice() -> candle_core::Result<()> {
++    let q = stack()?;
++    let values = (0..256)
++        .map(|j| (j as f32 - 127.0) / 384.0)
++        .collect::<Vec<_>>();
++    let xs = Tensor::from_vec(values, (1, 256), &Device::Cpu)?;
++    for expert in 0..3 {
++        let before = q.data()?.into_owned();
++        let old = QMatMul::from_qtensor(q.expert_slice_to(expert, &Device::Cpu)?)?
++            .forward(&xs)?
++            .to_vec2::<f32>()?;
++        let new = q.cpu_expert_matmul_k(expert, &xs)?
++            .expect("Q2K CPU source is supported")
++            .to_vec2::<f32>()?;
++        for (a, b) in new[0].iter().zip(&old[0]) {
++            assert!(a.is_finite());
++            assert!((a - b).abs() <= 1e-5 + 1e-5 * b.abs(), "{a} != {b}");
++        }
++        assert_eq!(q.data()?.as_ref(), before.as_slice(), "source bytes changed");
++    }
++    assert!(q.cpu_expert_matmul_k(3, &xs).is_err());
++    assert!(q.cpu_expert_matmul_k(
++        0, &Tensor::ones((1, 512), candle_core::DType::F32, &Device::Cpu)?
++    ).is_err());
++    Ok(())
++}
++
++#[test]
++fn q3k_copy_free_cpu_expert_projection_matches_owned_slice() -> candle_core::Result<()> {
++    let values = (0..3 * 2 * 256)
++        .map(|i| ((i % 23) as f32 - 11.0) / 16.0)
++        .collect::<Vec<_>>();
++    let q = QTensor::quantize(
++        &Tensor::from_vec(values, (3, 2, 256), &Device::Cpu)?,
++        GgmlDType::Q3K,
++    )?;
++    let x = Tensor::ones((1, 256), candle_core::DType::F32, &Device::Cpu)?;
++    for expert in 0..3 {
++        let old = QMatMul::from_qtensor(q.expert_slice_to(expert, &Device::Cpu)?)?
++            .forward(&x)?.to_vec2::<f32>()?;
++        let new = q.cpu_expert_matmul_k(expert, &x)?
++            .expect("Q3K supported").to_vec2::<f32>()?;
++        for (a, b) in new[0].iter().zip(&old[0]) {
++            assert!(a.is_finite());
++            assert!((a - b).abs() <= 1e-5 + 1e-5 * b.abs(), "{a} != {b}");
++        }
++    }
++    Ok(())
++}

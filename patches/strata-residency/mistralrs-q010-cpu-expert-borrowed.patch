@@ -1,0 +1,39 @@
+diff --git a/mistralrs-core/src/moe/experts/residency.rs b/mistralrs-core/src/moe/experts/residency.rs
+--- a/mistralrs-core/src/moe/experts/residency.rs
++++ b/mistralrs-core/src/moe/experts/residency.rs
+@@ -122,6 +122,25 @@
+         let gate = QMatMul::from_arc(self.gate.clone())?.forward(xs)?;
+         let up = QMatMul::from_arc(self.up.clone())?.forward(xs)?;
+         QMatMul::from_arc(self.down.clone())?.forward(&(activation(&gate)? * up)?)
++    }
++    /// CPU Q2_K/Q3_K compute without making packed weight Vecs for each route.
++    /// Other GGUF dtypes intentionally retain the established path.
++    fn compute_host(
++        &self,
++        expert: usize,
++        xs: &Tensor,
++        activation: &impl Fn(&Tensor) -> Result<Tensor>,
++    ) -> Result<Tensor> {
++        if let (Some(gate), Some(up)) = (
++            self.gate.cpu_expert_matmul_k(expert, xs)?,
++            self.up.cpu_expert_matmul_k(expert, xs)?,
++        ) {
++            let down_input = (activation(&gate)? * up)?;
++            if let Some(out) = self.down.cpu_expert_matmul_k(expert, &down_input)? {
++                return Ok(out);
++            }
++        }
++        self.slice_to(expert, &Device::Cpu)?.compute(xs, activation)
+     }
+     fn padded_bytes(&self, experts: u32) -> Result<u64> {
+         let mut bytes = 0u64;
+@@ -481,8 +500,7 @@
+                         .compute(&row.to_device(&self.device)?, &activation)?
+                         .to_device(&Device::Cpu)?
+                 } else {
+-                    host.slice_to(route.key.expert as usize, &Device::Cpu)?
+-                        .compute(&row, &activation)?
++                    host.compute_host(route.key.expert as usize, &row, &activation)?
+                 };
+                 let values = contribution.to_vec2::<f32>()?;
+                 for (dst, &value) in output[route.token * hidden..(route.token + 1) * hidden]

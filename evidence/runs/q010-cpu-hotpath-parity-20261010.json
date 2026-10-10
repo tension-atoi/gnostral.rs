@@ -1,0 +1,81 @@
+{
+  "schema": "q010-cpu-hotpath-source-and-parity-v1",
+  "status": "CPU_Q2K_Q3K_PARITY_PASS_CUDA_PERFORMANCE_UNQUALIFIED",
+  "scope": "isolated native Rust patch on candle + mistralrs Q2_K/Q3_K CPU expert hot path",
+  "baseline_reference": "a1cbb2b340aab6ed94ab06fa53e93c0f413a1b52",
+  "original_worktree_untouched": true,
+  "sources": [
+    {
+      "name": "vendor/candle-strata/candle-core/src/quantized/mod.rs",
+      "sha256": "55b3ea119b8e206cfdaeea3baf4e724252d48888787a422eb6474c53f6db27b3"
+    },
+    {
+      "name": "vendor/candle-strata/candle-core/tests/expert_residency_slice.rs",
+      "sha256": "530d67fc992aadd6b1cafa91d7710ca1303823bca152f084b9ca831c622caa92"
+    },
+    {
+      "name": "vendor/mistralrs-strata/mistralrs-core/src/moe/experts/residency.rs",
+      "sha256": "9680903c29d3f1a6ce278ef2aaabf6c03804f4ca7f50b88b29afead2526fbbf1"
+    }
+  ],
+  "incremental_patches": [
+    {
+      "name": "patches/strata-residency/candle-q010-cpu-expert-borrowed.patch",
+      "sha256": "35bb1500bbd36406a8b6e626f386616ee95d4bc4b02c022b65e2ee53be82fa75"
+    },
+    {
+      "name": "patches/strata-residency/mistralrs-q010-cpu-expert-borrowed.patch",
+      "sha256": "680a704199b0bbd8cb98a1c0559a53ab327b9b6e13af1b3517649e74de80c144"
+    }
+  ],
+  "test_traces": [
+    {
+      "path": "/mnt/hdd/lab/sessions/gnostral-q010-cpu-moe-hotpath-20261010/source-baseline-sha256.txt",
+      "sha256": "f72556797d4c32ee69b5828a9d4c4bf84fcc5cb956633b3985135e02894a9b52"
+    },
+    {
+      "path": "/mnt/hdd/lab/sessions/gnostral-q010-cpu-moe-hotpath-20261010/candle-q2k-test.log",
+      "sha256": "1c0400bcf2c143850280622370c776131b648f53aa27961b7a76a319cb5197bc"
+    },
+    {
+      "path": "/mnt/hdd/lab/sessions/gnostral-q010-cpu-moe-hotpath-20261010/candle-q2q3-parity.log",
+      "sha256": "82db5ac7b9fd70da07a4479a523eaa3d4d9bfed54fa756b387ef786ff1bb73b6"
+    },
+    {
+      "path": "/mnt/hdd/lab/sessions/gnostral-q010-cpu-moe-hotpath-20261010/runtime-quantized-cpu-parity-v3.log",
+      "sha256": "cee84f8650990e59f5a35c6f4b057ba635f6d13f67d32cd0b4e2da4edaf2c77e"
+    },
+    {
+      "path": "/mnt/hdd/lab/sessions/gnostral-q010-cpu-moe-hotpath-20261010/runtime-quantized-cpu-parity.log",
+      "sha256": "b34ae7967c580b4c3072f2eb26ce8df2b95d6dd9a02c718aaa4499da03b87a37"
+    },
+    {
+      "path": "/mnt/hdd/lab/sessions/gnostral-q010-cpu-moe-hotpath-20261010/runtime-quantized-cpu-parity-v2.log",
+      "sha256": "f84bfc7083feb68b0a9f4d2cd1cf106aee2c776de1da441e39e935ad6d415884"
+    }
+  ],
+  "candle_tests": {
+    "passed": 6,
+    "failed": 0,
+    "q2k_borrowed_vs_old": "PASS",
+    "q3k_borrowed_vs_old": "PASS"
+  },
+  "mistralrs_cpu_route": {
+    "passed": 1,
+    "failed": 0,
+    "mixed_Q2K_gate_up_Q3K_down": "PASS"
+  },
+  "earlier_build_failures": [
+    "stale compiled Q2_K symbol during source extension",
+    "missing error propagation on Tensor operator; corrected"
+  ],
+  "not_yet_qualified": [
+    "CUDA release executable",
+    "end-to-end speedup",
+    "host PSS",
+    "long-prompt semantic equivalence",
+    "dynamic per-route allocation profile"
+  ],
+  "engine_authority_mutated": false,
+  "no_production_service_or_modeld_mutation": true
+}

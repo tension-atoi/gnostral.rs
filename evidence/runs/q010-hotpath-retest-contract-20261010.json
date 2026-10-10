@@ -1,0 +1,17 @@
+{
+  "schema": "q010-retest-provenance-v1",
+  "motivation": "first pair text parity passed, but candidate reclaim GPU ambient delta +196 MiB exceeded predeclared 128 MiB; desktop graphics processes concurrently active",
+  "unmodified_success_gates": {
+    "median_tps_ratio_minimum": 1.1,
+    "max_gpu_peak_delta_mib": 128,
+    "max_rss_peak_delta_mib": 512,
+    "post_reclaim_gpu_delta_threshold_mib": 128
+  },
+  "source_script_sha256": "2dd4a6c9535bff59e550ff6b94ad15c0a62055e500e0198f17344f7d5d6574a3",
+  "retest_script_sha256": "158b50cc13a39969cc66680e81a924b7d493ff1de0e45f28ee4d2dc3c97f5449",
+  "only_source_change": "S path to distinct lab session",
+  "prior_session": "/mnt/hdd/lab/sessions/gnostral-q010-cpu-moe-hotpath-20261010",
+  "source_model": "/mnt/models/active/gnostral/Qwen3-30B-A3B-Q2_K.gguf",
+  "original_trial_status": "NOT_QUALIFIED",
+  "original_trial_summary_path": "/mnt/hdd/lab/sessions/gnostral-q010-cpu-moe-hotpath-20261010/summary.json"
+}

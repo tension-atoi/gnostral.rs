@@ -1,0 +1,15 @@
+{
+  "status": "NOT_QUALIFIED",
+  "completed": 2,
+  "by_engine": {
+    "baseline": 1,
+    "candidate": 1
+  },
+  "evidence_paths": [
+    "/mnt/hdd/lab/sessions/gnostral-q010-cpu-moe-hotpath-20261010/01-baseline.json",
+    "/mnt/hdd/lab/sessions/gnostral-q010-cpu-moe-hotpath-20261010/01-candidate.json"
+  ],
+  "end_utc": "2026-10-10T06:53:14.014514+00:00",
+  "repetition_protocol": "fresh server per repetition; both token ceilings per process; balanced blocks, direct 2-engine VRAM comparison",
+  "speedup_claim": null
+}
