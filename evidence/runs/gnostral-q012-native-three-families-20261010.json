@@ -1,0 +1,86 @@
+{
+  "compile_mode": "MISTRALRS_LAB_FAST_CUDA_BUILD=1; offline release; not optimized production configuration",
+  "date": "2026-10-10",
+  "execution_scope": "three sequential separate localhost processes, one exact binary, bounded VRAM reclaim; not a persistent server",
+  "feature_regression": {
+    "corrected_moe_gpu_peak_mib": 2427,
+    "first_attempt_moe_gpu_peak_mib": 6772,
+    "first_attempt_status": "NOT_QUALIFIED",
+    "initial_binary_sha256": "0b08e65267786df03f3469e4ff65ae36c9c06eafba47580689704984fa7a8b12",
+    "omitted_feature": "gnostral-expert-residency",
+    "runtime_residency_witness": true
+  },
+  "independent_controls": {
+    "all_servers_reaped": true,
+    "five_historical_negative_classes_kept": 5,
+    "single_binary_verified": true,
+    "three_model_weight_hashes_revalidated": true
+  },
+  "limits": [
+    "single functional probe per family",
+    "no full quality benchmark",
+    "no simultaneous hosting or hot swap",
+    "no production readiness",
+    "no real-life cgroup isolation claim from model probes",
+    "full logs, private embedding vectors and local binaries excluded from this public summary"
+  ],
+  "native_binary_bytes": 262133264,
+  "native_binary_sha256": "64eec222ccefff4cd4c0067bd83348f1d22eebda27d0d857e352ee090cf19723",
+  "profiles": {
+    "dense": {
+      "binary_sha256": "64eec222ccefff4cd4c0067bd83348f1d22eebda27d0d857e352ee090cf19723",
+      "completion_s": 0.065,
+      "completion_tokens": 4,
+      "gpu_card_peak_mib": 5025,
+      "gpu_reclaim_delta_mib": -42,
+      "model": "Qwen2.5-Coder-1.5B-Instruct",
+      "model_weight_sha256": "c1b9b30e907950516ba3c646bdf570d8084c25a6410a0cdca80cf04b11bc13a8",
+      "probe_kind": "text.chat",
+      "receipt_sha256": "f9a19b6276a3535b4136c2ea9856cf582c1a1107303ced74ba90d9b0a7d2bc8e",
+      "server_rss_peak_mib": 3556.38,
+      "status": "PASS_FUNCTIONAL"
+    },
+    "embedding": {
+      "binary_sha256": "64eec222ccefff4cd4c0067bd83348f1d22eebda27d0d857e352ee090cf19723",
+      "dimensions": 1024,
+      "gpu_card_peak_mib": 2783,
+      "gpu_reclaim_delta_mib": -2,
+      "model": "Qwen3-Embedding-0.6B",
+      "model_weight_sha256": "0437e45c94563b09e13cb7a64478fc406947a93cb34a7e05870fc8dcd48e23fd",
+      "probe_kind": "embedding.vector",
+      "raw_vector_sha256": "4f50848a00df98a77e49bec35863a37ddc371d89d566d928e0451d1185d08547",
+      "receipt_sha256": "54e5a61e8d2fb1fd88e719c81fc9fcda43d3df3927667e8118984914cd062cfe",
+      "related_cosine": 0.784622,
+      "server_rss_peak_mib": 1533.02,
+      "status": "PASS_FUNCTIONAL",
+      "unrelated_cosine": 0.170419,
+      "vector_count": 3
+    },
+    "moe": {
+      "binary_sha256": "64eec222ccefff4cd4c0067bd83348f1d22eebda27d0d857e352ee090cf19723",
+      "completion_s": 2.774,
+      "completion_tokens": 42,
+      "gpu_card_peak_mib": 2427,
+      "gpu_reclaim_delta_mib": 0,
+      "model": "Qwen3-30B-A3B Q2_K",
+      "model_weight_sha256": "db3ce897ccc9e7d9dbf17fe083cae7880a2092aa473b45eba8b77715aa9ca170",
+      "probe_kind": "text.moe",
+      "receipt_sha256": "cfb603ff2a7fa0c09beefca6014c5c41bc27efa351ea7e70efd9a3ffd98275ba",
+      "server_rss_peak_mib": 19282.02,
+      "status": "PASS_FUNCTIONAL"
+    }
+  },
+  "required_features": [
+    "cuda",
+    "gnostral-expert-residency"
+  ],
+  "schema": "gnostral.q012.public-qualification.v1",
+  "source_evidence_digests": {
+    "build-attestation.json": "ab9ec24f12ffb8c8874dcb642716f4ad4a2592f8bb8aba4678b54b6fdda24404",
+    "feature-causal-delta.json": "284ce1f3df08b84beaeeae723ecd0f5e82a1e7f70ce331ab923c8eed9e1834f8",
+    "independent-three-family-audit.json": "52b4deb559b2d7eff8a035975b46191629a1d4f44671d4267f9e721f9a38fb1f",
+    "q012-feature-runtime-witness.json": "a2fb6feb894ac501eb55cb8f7c505de61efcd1318f6e30484efbffc0f0d4d5ab"
+  },
+  "target": "NVIDIA RTX 3070 8 GiB; host 32 GiB",
+  "verdict": "THREE_FAMILIES_SAME_BINARY_PASS"
+}

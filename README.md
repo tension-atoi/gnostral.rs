@@ -38,6 +38,16 @@ A historical local commit title stated that a 40 tok/s FG-03 product gate had be
 
 See quests/Q-001-FG03-TRUTH-01.md.
 
+## Q-012 — three native inference families (2026-10-10)
+
+On the bounded RTX 3070 reference host, **one exact Rust/CUDA executable** passed sequential, independently started functional probes for dense text, Qwen3 embeddings and quantized MoE. The initial MoE attempt timed out because the optional `gnostral-expert-residency` Cargo feature was absent; the corrected build passed independent auditing. No claim of concurrent hosting, optimized performance or production stability is made.
+
+- [Full French/English report](research/runtime/GNOSTRAL-Q012-NATIVE-CAPABILITIES-20261010.md)
+- [Sanitized public qualification receipt](evidence/runs/gnostral-q012-native-three-families-20261010.json)
+- [Fail-closed build feature gate](harness/experiments/q012_feature_gate.py) and [bounded build recipe](scripts/q012-build-lab.sh)
+
+The MIT-licensed [lab-owned expert-residency crate](crates/gnostral-expert-residency/) is included (10 local crate tests pass). The reproduction recipe additionally requires locally prepared third-party vendored sources and a `gnu6-lab-run` systemd launch guard; it intentionally does not distribute raw model weights, private embedding vectors or upstream vendor subtrees.
+
 ## License
 
 Original gnostral.rs material is MIT licensed. Vendored, adapted, or derived third-party material is not relicensed by this repository. Its original license and provenance must be preserved.

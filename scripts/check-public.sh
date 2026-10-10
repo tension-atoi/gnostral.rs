@@ -11,8 +11,11 @@ if git grep -nE '(gho_|ghp_|github_pat_|AKIA[0-9A-Z]{16})' -- ':!scripts/check-p
   fail=1
 fi
 
-if find . -type f \( -name '*.gguf' -o -name '*.safetensors' -o -name '*.nsys-rep' -o -name '*.pid' \) -print -quit | grep -q .; then
-  echo "ERROR: forbidden public artifact type found" >&2
+# Inspect the Git index, not local untracked vendored dependencies or model fixtures.
+# CI checks exactly the files being published; a forced git add is still detected.
+indexed_files="$(git ls-files --cached)" || { echo "ERROR: cannot inspect Git index" >&2; exit 1; }
+if grep -E '\.(gguf|safetensors|nsys-rep|pid)$' <<<"$indexed_files"; then
+  echo "ERROR: forbidden public artifact type staged or tracked" >&2
   fail=1
 fi
 
