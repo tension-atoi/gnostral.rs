@@ -81,3 +81,7 @@ A single successful auto-fit at one VRAM level is insufficient.
 - `BLOCKED_MODEL_INVENTORY`: CUDA intake is viable but no compatible local
   placement artifact is available.
 - `RUNTIME_BLOCKED`: the pinned CUDA path cannot reach semantic readiness.
+
+## Post-closure review — 2026-10-09
+
+**Disposition: CLOSED / BLOCKED_MODEL_INVENTORY.** Strata expert cache admission, WakeKV KV demotion and zLLM layer-level adaptive CPU/CUDA placement are distinct interventions. Neither new lead satisfies Q-005's required same-model causal CONTROL versus DESKTOP-PRESSURE placement experiment. No Qwen3.6/3.8 artifact download or reinterpretation of Gemma4's CUDA-intake result is authorized by this review.

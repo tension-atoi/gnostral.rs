@@ -27,3 +27,7 @@ PROVEN: the bounded public baseline remains FG-02 at 35.2 tok/s until a complete
 ## Non-claim
 
 This does not prove no unpublished or subsequently lost run ever exceeded 40 tok/s. It proves only that retained evidence is insufficient to publish that number as qualified.
+
+## Post-closure review — 2026-10-09
+
+**Disposition: CLOSED / NO CHANGE TO QUALIFIED BASELINE.** The local Q-009 Strata absorption design and the WakeKV paper are not Bonsai FG-03 performance evidence. Do not reissue the rejected 40 tok/s claim or mix speed estimates from other engines/models with the qualified FG-02 result. Any new Bonsai throughput claim requires an independently frozen, retained and complete protocol.

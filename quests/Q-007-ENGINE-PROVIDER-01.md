@@ -62,3 +62,7 @@ Q-007 closes only when:
 6. forbidden engine-internal authority is explicit;
 7. the contract can represent Q-002 mistral.rs, Q-003 Pulsar, Q-005 zLLM,
    and a one-shot/CLI engine without engine-specific fields leaking upward.
+
+## Post-closure review — 2026-10-09
+
+**Disposition: CLOSED / CONTRACT_V0_QUALIFIED, NO PRODUCTION ADAPTER CLAIM.** The dependency-free Rust reference contract and its 7/7 local tests are not concrete production adapters. Q-009 may emit engine-origin expert-residency observations; future WakeKV experiments may emit KV-specific observations. The provider must not prescribe expert/KV slots or movement. Preserve declared versus qualified capability, provenance/UNKNOWN, semantic readiness, and unload-versus-physical-reclaim separation. No v0 public API or control authority is changed by this note.

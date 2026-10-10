@@ -111,3 +111,7 @@ See:
 - `evidence/q002/control-qualification.json`
 
 The control arm is now frozen for Q-003 and later challenger comparisons.
+
+## Post-closure review — 2026-10-09
+
+**Disposition: CLOSED / CONTROL CONTRACT RETAINED.** Q-009 Strata and prospective WakeKV experiments must preserve exact binary/model/quantization identities, CONTROL versus DESKTOP-PRESSURE, HTTP-ready versus semantic-ready, request-level timing, concurrency and context boundaries, physical reclaim and Xid/MMU observations. The Q-002 numbers are not transferable to a different model, MoE geometry, or KV policy. This is a reusable qualification discipline, not approval of either new mechanism.

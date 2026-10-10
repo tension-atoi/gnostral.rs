@@ -46,9 +46,9 @@ and the [Q-008 promotion decision](Q-008-MODELD-PROMOTION-GATE.md).
 - No inference workload, CUDA build, GPU allocation or new system service
   is required by Q013-A. Run local tests under `gnu6-lab-run` when available.
 
-## Q013-B — intentionally pending
+## Q013-B to Q013-D — original forward gates, updated October 10
 
-A separate qualification is required before any real engine interaction:
+These checks were drafted **before** the bounded Q013-B disposable process and Q013-C real-dense pilot. Q013-B has since passed its CPU fixture scope; Q013-C passed one narrow real engine cycle. The following items remain unmet wherever they imply an authenticated listener, independently established witness trust, generic adapter, or multi-engine authority:
 
 - A concrete adapter must verify the independent semantic predicate against
   a real output and cryptographically bind output digest/receipt to the

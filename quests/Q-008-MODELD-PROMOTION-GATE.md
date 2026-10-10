@@ -78,3 +78,7 @@ forcing the supervisor to guess or emulate engine internals.
 
 Q-008 does not authorize production deployment by itself. It decides which
 authority boundaries are justified enough to enter an implementation program.
+
+## Post-closure review — 2026-10-09
+
+**Disposition: CLOSED / PROMOTION DECISION UNCHANGED.** The approved local Strata native-absorption design (tracked as Q-009) already has an isolated implementation branch with ranked admission, transactional residency, CUDA expert extraction parity and Task 4 work in progress. Full inference/GPU A/B qualification has not happened. WakeKV remains a paper-backed experimental lead, not a locally qualified KV implementation and not an opened implementation quest. Neither transfers expert, KV, CUDA-page, batch or kernel authority to modeld. Keep observability and resource-envelope intent separate from engine-owned materialization; any proposed authority change requires a distinct operator decision with costs.

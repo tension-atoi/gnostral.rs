@@ -53,3 +53,7 @@ Q-006 closes with a table of:
 for the relevant UniLLM interfaces.
 
 No code is vendored and no runtime is promoted by this quest.
+
+## Post-closure review — 2026-10-09
+
+**Disposition: CLOSED / DONOR BOUNDARY RETAINED.** Q-007 consumed the qualified registry/lifecycle/health concepts. New Strata and WakeKV policy candidates belong inside their owning inference engines, not in a generic UniLLM-derived supervisor allocator. Any future donor code or design must preserve request-state correctness (including preemption rollback), generation-aware cache validity and observation provenance; these are test hypotheses, not locally reproduced UniLLM defects.

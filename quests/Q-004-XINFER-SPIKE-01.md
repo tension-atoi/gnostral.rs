@@ -84,3 +84,7 @@ Q-004 closes as useful only if xInfer demonstrates at least one of:
    and is not already represented by the Q-002 control.
 
 Otherwise xInfer remains a watched upstream, not a donor or product candidate.
+
+## Post-closure review — 2026-10-09
+
+**Disposition: CLOSED / NOT_QUALIFIED / RUNTIME_BLOCKED.** WakeKV is a separate reported FlexiCache/vLLM research mechanism; it does not retroactively establish xInfer TurboQuant, continuous batching or KV correctness on SM86. Reassessment requires a new pinned, compatible upstream build, a runnable matching local model and a new frozen same-runtime KV A/B; no such rerun is recorded by this audit. Keep build failures and OOMs as negative evidence.

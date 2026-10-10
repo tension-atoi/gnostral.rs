@@ -92,3 +92,7 @@ Published evidence:
 
 Q-003 supports mandatory runtime observability but does not authorize a
 generic materialization API or new residency authority.
+
+## Post-closure review — 2026-10-09
+
+**Disposition: CLOSED / OBSERVATION ONLY.** The local Strata intake proposes **engine-owned expert-weight residency**; WakeKV (arXiv:2610.02713) proposes **engine-owned reversible, head-aware KV residency**. These are different object types, transfer patterns and consistency conditions. Neither was evaluated in Q-003. A later mechanism experiment should distinguish intent, transfer start, verified completion, safe consumer lifetime, retrievable coverage, failed/cancelled transitions, release and actual VRAM/host use. Cross-engine comparable observations remain supported; generic eviction/promotion controls do not. See Q-009 and `research/runtime/WAKEKV-LEAD-20261009.md`.

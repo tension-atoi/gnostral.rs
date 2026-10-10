@@ -24,4 +24,9 @@ if ! grep -q '35.2 tok/s' README.md; then
   fail=1
 fi
 
+if ! python3 scripts/check-doc-links.py; then
+  echo "ERROR: active public documentation links/status index failed" >&2
+  fail=1
+fi
+
 exit "$fail"
